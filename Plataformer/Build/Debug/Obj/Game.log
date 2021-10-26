@@ -1,21 +1,11 @@
-﻿  Main.cpp
-  App.cpp
-  Audio.cpp
-  Input.cpp
-  Map.cpp
-  ModulePhysics.cpp
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(94,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(95,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(139,21): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(189,44): warning C4305: '=': truncamiento de 'double' a 'float32'
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(361,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(362,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Game\Source\ModulePhysics.cpp(368,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+﻿  ModulePhysics.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(94,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(95,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(139,21): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(189,44): warning C4305: '=': truncamiento de 'double' a 'float32'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(361,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(362,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(368,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
   Scene.cpp
-  Render.cpp
-  Textures.cpp
-  Window.cpp
-  Log.cpp
-  pugixml.cpp
   Generando código...
-  Game.vcxproj -> C:\Users\guerr\Downloads\GameDev_Platformer-main\Plataformer\Build\Debug\Game.exe
+  Game.vcxproj -> C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

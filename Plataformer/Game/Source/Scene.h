@@ -2,6 +2,7 @@
 #define __SCENE_H__
 
 #include "Module.h"
+#include "ModulePhysics.h"
 
 struct SDL_Texture;
 
@@ -34,6 +35,10 @@ public:
 
 private:
 	SDL_Texture* img;
+
+	b2World* world;
+	b2Body* ground;
+	b2Vec2 p;
 };
 
 #endif // __SCENE_H__

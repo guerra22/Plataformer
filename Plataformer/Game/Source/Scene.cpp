@@ -36,15 +36,19 @@ bool Scene::Start()
 	// L03: DONE: Load map
 	//app->map->Load("iso_walk.tmx");
 	app->map->Load("map.tmx");
-	
+
+	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
+
+	// needed to create joints like mouse joint
+	b2BodyDef bd;
+	ground = world->CreateBody(&bd);
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	LOG("Creating Physics 2D environment");
 
-	/*
+	
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
-	world->SetContactListener(this);
 
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -75,7 +79,7 @@ bool Scene::Start()
 
 	delete p;
 
-	*/
+	
 	return true;
 }
 

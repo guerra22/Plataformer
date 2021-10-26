@@ -1,11 +1,4 @@
-﻿  ModulePhysics.cpp
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(94,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(95,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(139,21): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(189,44): warning C4305: '=': truncamiento de 'double' a 'float32'
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(361,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(362,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(368,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
-  Scene.cpp
-  Generando código...
+﻿  Scene.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
   Game.vcxproj -> C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

@@ -9,7 +9,7 @@
 
 #include "Defs.h"
 #include "Log.h"
-
+#include "ModulePhysics.h"
 #include "Box2D/Box2D/Box2D.h"
 
 Scene::Scene() : Module()
@@ -47,7 +47,7 @@ bool Scene::Start()
 
 	LOG("Creating Physics 2D environment");
 
-	
+	/*
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 
 	b2BodyDef body;
@@ -78,8 +78,11 @@ bool Scene::Start()
 	b->CreateFixture(&fixture);
 
 	delete p;
-
+	*/
 	
+	//hitbox = app->physics->CreateRectangle(100, 100, 100, 100, b2_dynamicBody);
+
+
 	return true;
 }
 

@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "ModulePhysics.h"
+#include "Box2D/Box2D/Box2D.h"
 
 struct SDL_Texture;
 
@@ -33,12 +34,20 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	PhysBody* hitbox;
+
+	p2List<PhysBody*> box;
+
+
 private:
 	SDL_Texture* img;
 
 	b2World* world;
 	b2Body* ground;
 	b2Vec2 p;
+
+	
+
 };
 
 #endif // __SCENE_H__

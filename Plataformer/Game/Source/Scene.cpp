@@ -37,12 +37,11 @@ bool Scene::Start()
 	//app->map->Load("iso_walk.tmx");
 	app->map->Load("map.tmx");
 
-
+	
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	LOG("Creating Physics 2D environment");
-
 	
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 
@@ -75,18 +74,42 @@ bool Scene::Start()
 
 	delete p;
 	
+	Platform* plat1 = new Platform;
+	Platform* plat2 = new Platform;
+	Platform* plat3 = new Platform;
+	Platform* plat4 = new Platform;
+	Platform* plat5 = new Platform;
+	Platform* plat6 = new Platform;
+	Platform* plat7 = new Platform;
+	Platform* plat8 = new Platform;
+	Platform* plat9 = new Platform;
+	Platform* plat10 = new Platform;
+	Platform* plat11 = new Platform;
+	Platform* plat12 = new Platform;
+	Platform* plat13 = new Platform;
+	Platform* plat14 = new Platform;
+	Platform* plat15 = new Platform;
+	Platform* plat16 = new Platform;
+
+	plat1->platform = app->physics->CreateRectangle(92,368, 135, 30, b2_staticBody);
+	plat2->platform = app->physics->CreateRectangle(272, 337, 95, 30, b2_staticBody);
+	plat3->platform = app->physics->CreateRectangle(368, 304, 30, 30, b2_staticBody);
+	plat4->platform = app->physics->CreateRectangle(433, 337, 30, 30, b2_staticBody);
+	plat5->platform = app->physics->CreateRectangle(495, 304, 30, 30, b2_staticBody);
+	plat6->platform = app->physics->CreateRectangle(559, 337, 30, 30, b2_staticBody);
+	plat7->platform = app->physics->CreateRectangle(624, 304, 30, 30, b2_staticBody);
+    plat8->platform = app->physics->CreateRectangle(720, 240, 95, 30, b2_staticBody);
+	plat9->platform = app->physics->CreateRectangle(848, 240, 30, 95, b2_staticBody);
+
+	plat10->platform = app->physics->CreateRectangle(912, 175, 30, 30, b2_staticBody);
+	plat11->platform = app->physics->CreateRectangle(976, 143, 30, 30, b2_staticBody);
+	plat12->platform = app->physics->CreateRectangle(1040, 112, 30, 30, b2_staticBody);
+    plat13->platform = app->physics->CreateRectangle(1104, 80, 30, 30, b2_staticBody);
+
+	plat14->platform = app->physics->CreateRectangle(1295, 400, 30, 30, b2_staticBody);
+	plat15->platform = app->physics->CreateRectangle(1376, 368, 60, 30, b2_staticBody);
+	plat16->platform = app->physics->CreateRectangle(1509, 336, 135, 30, b2_staticBody);
 	
-
-
-	b7 = app->physics->CreateRectangle(20, 20, 20, 20, b2_staticBody);
-	b2PolygonShape box7;
-	box7.SetAsBox(PIXEL_TO_METERS(10) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
-
-	b2FixtureDef fixture7;
-	fixture7.shape = &box7;
-	fixture7.density = 1.0f;
-
-
 
 	return true;
 }
@@ -107,17 +130,11 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	//if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) app->render->camera.y += 1;
-
-	//if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) app->render->camera.y -= 1;
-
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		app->render->camera.x += 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x -= 1;
-
-	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
+	if(app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		app->render->camera.x -= 2;
 
 	// Draw map
 	app->map->Draw();

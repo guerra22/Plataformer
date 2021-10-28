@@ -33,12 +33,14 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+    
+	struct Platform {
+		PhysBody* platform;
 
-	PhysBody* hitbox;
+	};
 
 	p2List<PhysBody*> box;
 
-	PhysBody* b7;
 
 private:
 	SDL_Texture* img;

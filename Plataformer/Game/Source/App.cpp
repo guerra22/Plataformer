@@ -29,13 +29,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
+	
 	AddModule(win);
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(scene);
-	AddModule(map);
 	AddModule(physics);
+	AddModule(map);
+	AddModule(scene);
 	// Render last to swap buffer
 	AddModule(render);
 }

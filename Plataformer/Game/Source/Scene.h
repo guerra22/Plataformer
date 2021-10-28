@@ -38,6 +38,7 @@ public:
 
 	p2List<PhysBody*> box;
 
+	PhysBody* b7;
 
 private:
 	SDL_Texture* img;

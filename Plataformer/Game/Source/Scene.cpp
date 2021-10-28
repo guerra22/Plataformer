@@ -10,7 +10,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "ModulePhysics.h"
-#include "Box2D/Box2D/Box2D.h"
+#include "External/Box2D/Box2D/Box2D.h"
 
 Scene::Scene() : Module()
 {
@@ -37,17 +37,13 @@ bool Scene::Start()
 	//app->map->Load("iso_walk.tmx");
 	app->map->Load("map.tmx");
 
-	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 
-	// needed to create joints like mouse joint
-	b2BodyDef bd;
-	ground = world->CreateBody(&bd);
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	LOG("Creating Physics 2D environment");
 
-	/*
+	
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 
 	b2BodyDef body;
@@ -78,9 +74,18 @@ bool Scene::Start()
 	b->CreateFixture(&fixture);
 
 	delete p;
-	*/
 	
-	//hitbox = app->physics->CreateRectangle(100, 100, 100, 100, b2_dynamicBody);
+	
+
+
+	b7 = app->physics->CreateRectangle(20, 20, 20, 20, b2_staticBody);
+	b2PolygonShape box7;
+	box7.SetAsBox(PIXEL_TO_METERS(10) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
+
+	b2FixtureDef fixture7;
+	fixture7.shape = &box7;
+	fixture7.density = 1.0f;
+
 
 
 	return true;

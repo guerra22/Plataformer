@@ -1,11 +1,23 @@
-<<<<<<< Updated upstream
-﻿  Scene.cpp
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
-  Game.vcxproj -> C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe
-=======
-﻿  Player.cpp
+﻿  App.cpp
 C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
 C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+  ModulePhysics.cpp
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(96,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(97,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(141,21): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(191,44): warning C4305: '=': truncamiento de 'double' a 'float32'
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(341,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(342,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(348,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+  Player.cpp
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+  Scene.cpp
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+  Render.cpp
+  Textures.cpp
+  Window.cpp
+  Generando código...
+  LINK : no se encontró C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   Game.vcxproj -> C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe
->>>>>>> Stashed changes

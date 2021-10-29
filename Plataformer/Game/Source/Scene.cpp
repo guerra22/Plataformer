@@ -50,13 +50,13 @@ bool Scene::Start()
 			0,480
 	}; 
 	
-<<<<<<< Updated upstream
+
 	PhysBody* pb_wall1 = app->physics->CreateChain(0, 0, points, 8, b2_staticBody);
 	walls.add(pb_wall1);
 
-=======
+
 	// paltforms creation
->>>>>>> Stashed changes
+
 	Platform* plat1 = new Platform;
 	Platform* plat2 = new Platform;
 	Platform* plat3 = new Platform;

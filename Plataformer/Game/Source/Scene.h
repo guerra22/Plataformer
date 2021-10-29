@@ -38,7 +38,7 @@ public:
 		PhysBody* platform;
 	};
 
-
+	p2List<PhysBody*> walls;
 
 	p2List<PhysBody*> box;
 

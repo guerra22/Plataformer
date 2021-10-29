@@ -45,11 +45,14 @@ bool Scene::Start()
 	
 	int points[8] = {
 			0,0,
-			SCREEN_WIDTH,0,
-			SCREEN_WIDTH,SCREEN_HEIGHT,
-			0,SCREEN_HEIGHT
-	};
+			1598,0,
+			1598,480,
+			0,480
+	}; 
 	
+	PhysBody* pb_wall1 = app->physics->CreateChain(0, 0, points, 8, b2_staticBody);
+	walls.add(pb_wall1);
+
 	Platform* plat1 = new Platform;
 	Platform* plat2 = new Platform;
 	Platform* plat3 = new Platform;

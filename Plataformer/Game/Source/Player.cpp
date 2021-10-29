@@ -32,8 +32,10 @@ bool Player::Awake()
 
 bool Player::Start()
 {
-	//PlayerBody = new PhysBody;
-	//PlayerBody = app->physics->CreateRectangle(92, 340, 30, 60, b2_dynamicBody);
+	player = new PlayerObj;
+	player->playerBody = app->physics->CreateRectangle(92, 368, 30, 60, b2_dynamicBody);
+	player->isDead = false;
+	player->IsJumping = false;
 
 	
 
@@ -48,8 +50,8 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
-	//if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)  PlayerBody->body->SetLinearVelocity({1,0});
-	//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)  PlayerBody->body->SetLinearVelocity({ -1,0 });
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) player->playerBody->body->SetLinearVelocity({ 1, 0 });
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) player->playerBody->body->SetLinearVelocity({ -1, 0 });
 
 	return true;
 }

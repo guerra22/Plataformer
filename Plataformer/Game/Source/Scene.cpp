@@ -43,36 +43,12 @@ bool Scene::Start()
 
 	LOG("Creating Physics 2D environment");
 	
-	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
-
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(0));
-
-	b2Body* b = world->CreateBody(&body);
-
-	b2ChainShape shape;
-	b2Vec2* p = new b2Vec2[4];
 	int points[8] = {
 			0,0,
 			SCREEN_WIDTH,0,
 			SCREEN_WIDTH,SCREEN_HEIGHT,
 			0,SCREEN_HEIGHT
 	};
-	for (uint i = 0; i < 4; ++i)
-	{
-		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
-		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
-	}
-
-	shape.CreateLoop(p, 4);
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-
-	b->CreateFixture(&fixture);
-
-	delete p;
 	
 	Platform* plat1 = new Platform;
 	Platform* plat2 = new Platform;
@@ -111,6 +87,8 @@ bool Scene::Start()
 	plat16->platform = app->physics->CreateRectangle(1509, 336, 135, 30, b2_staticBody);
 	
 
+	
+
 	return true;
 }
 
@@ -123,8 +101,6 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) app->physics->b6->SetLinearVelocity({ 1,0 });;
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) app->physics->b6->SetLinearVelocity({ -1,0 });;
 	
     // L02: DONE 3: Request Load / Save when pressing L/S
 	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)

@@ -31,7 +31,15 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	PhysBody* PlayerBody;
+
+	struct PlayerObj {
+		PhysBody* playerBody;
+		bool isDead;
+		bool IsJumping;
+	};
+
+	PlayerObj* player;
+
 
 };
 

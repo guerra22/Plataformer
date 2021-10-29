@@ -37,28 +37,6 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	//272, 337, 95, 30
-	b2BodyDef body6;
-	body6.type = b2_dynamicBody;
-	body6.position.Set(PIXEL_TO_METERS(272), PIXEL_TO_METERS(300));
-
-    b6 = world->CreateBody(&body6);
-	b2PolygonShape box6;
-	box6.SetAsBox(PIXEL_TO_METERS(30) * 0.5f, PIXEL_TO_METERS(60) * 0.5f);
-
-	b2FixtureDef fixture6;
-	fixture6.shape = &box6;
-	//fixture6.density = 1.0f;
-
-	b6->CreateFixture(&fixture6);
-
-	PhysBody* pbody6 = new PhysBody();
-	pbody6->body = b6;
-	b6->SetUserData(pbody6);
-	pbody6->width = 300;
-	pbody6->height = 780;
-
-
 	return true;
 }
 
@@ -108,7 +86,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
-	fixture.density = 1.0f;
+	//fixture.density = 1.0f;
 
 	b->CreateFixture(&fixture);
 

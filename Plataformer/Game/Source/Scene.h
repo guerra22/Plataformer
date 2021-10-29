@@ -36,7 +36,6 @@ public:
     
 	struct Platform {
 		PhysBody* platform;
-
 	};
 
 	p2List<PhysBody*> box;

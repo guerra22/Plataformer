@@ -48,8 +48,8 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
-	//if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)  // PlayerBody->body->SetLinearVelocity({1,0});
-	//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)   //PlayerBody->body->SetLinearVelocity({ -1,0 });
+	//if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)  PlayerBody->body->SetLinearVelocity({1,0});
+	//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)  PlayerBody->body->SetLinearVelocity({ -1,0 });
 
 	return true;
 }

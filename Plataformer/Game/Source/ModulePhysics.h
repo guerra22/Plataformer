@@ -66,6 +66,7 @@ public:
 	bool debug;
 	b2MouseJoint* mouse_joint;
 	b2World* world;
+	b2Body* b6;
 
 private:
 

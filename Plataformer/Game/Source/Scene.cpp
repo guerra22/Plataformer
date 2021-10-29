@@ -123,6 +123,9 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) app->physics->b6->SetLinearVelocity({ 1,0 });;
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) app->physics->b6->SetLinearVelocity({ -1,0 });;
+	
     // L02: DONE 3: Request Load / Save when pressing L/S
 	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		app->LoadGameRequest();

@@ -31,6 +31,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 	struct PlayerObj {
 		PhysBody* playerBody;

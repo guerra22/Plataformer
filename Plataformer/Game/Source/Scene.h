@@ -38,7 +38,13 @@ public:
 		PhysBody* platform;
 	};
 
+<<<<<<< Updated upstream
 	p2List<PhysBody*> walls;
+=======
+	PhysBody* deathFloor;
+
+
+>>>>>>> Stashed changes
 
 	p2List<PhysBody*> box;
 

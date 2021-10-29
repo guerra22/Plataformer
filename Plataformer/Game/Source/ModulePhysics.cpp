@@ -273,28 +273,6 @@ bool ModulePhysics::PostUpdate()
 			break;
 			}
 
-			/*if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-			{
-				p = { PIXEL_TO_METERS(app->input->GetMousePosition().x), PIXEL_TO_METERS(app->input->GetMousePosition().y) };
-				if (f->GetShape()->TestPoint(b->GetTransform(), p) == true)
-				{
-					mouseBody = b;
-
-					b2Vec2 mousePosition;
-					mousePosition.x = p.x;
-					mousePosition.y = p.y;
-
-					b2MouseJointDef def;
-					def.bodyA = ground;
-					def.bodyB = mouseBody;
-					def.target = mousePosition;
-					def.dampingRatio = 0.5f;
-					def.frequencyHz = 2.0f;
-					def.maxForce = 100.0f * mouseBody->GetMass();
-
-					mouse_joint = (b2MouseJoint*)world->CreateJoint(&def);
-				}*/
-			/*}*/
 		}
 	}
 

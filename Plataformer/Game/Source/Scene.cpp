@@ -50,9 +50,13 @@ bool Scene::Start()
 			0,480
 	}; 
 	
+<<<<<<< Updated upstream
 	PhysBody* pb_wall1 = app->physics->CreateChain(0, 0, points, 8, b2_staticBody);
 	walls.add(pb_wall1);
 
+=======
+	// paltforms creation
+>>>>>>> Stashed changes
 	Platform* plat1 = new Platform;
 	Platform* plat2 = new Platform;
 	Platform* plat3 = new Platform;
@@ -89,7 +93,9 @@ bool Scene::Start()
 	plat15->platform = app->physics->CreateRectangle(1376, 368, 60, 30, b2_staticBody);
 	plat16->platform = app->physics->CreateRectangle(1509, 336, 135, 30, b2_staticBody);
 	
-
+	//death floor created
+	deathFloor = new PhysBody;
+	deathFloor = app->physics->CreateRectangle(250, 470, 2800, 30, b2_kinematicBody);
 	
 
 	return true;

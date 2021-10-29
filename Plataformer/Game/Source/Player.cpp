@@ -50,8 +50,12 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) player->playerBody->body->SetLinearVelocity({ 1, 0 });
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) player->playerBody->body->SetLinearVelocity({ -1, 0 });
+	if (player->isDead == false) {
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) player->playerBody->body->SetLinearVelocity({ 3, 0 });
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) player->playerBody->body->SetLinearVelocity({ -3, 0 });
+	}
+	
+
 
 	return true;
 }
@@ -68,4 +72,15 @@ bool Player::CleanUp()
 	LOG("Freeing Player");
 
 	return true;
+}
+
+
+void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	bodyA = player->playerBody;
+
+	if (bodyB->body->GetType() == 1)
+	{
+		player->isDead = true;
+	}
 }

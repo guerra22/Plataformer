@@ -45,8 +45,8 @@ bool Scene::Start()
 	
 	int points[8] = {
 			0,0,
-			1598,0,
-			1598,480,
+			1280,0,
+			1280,480,
 			0,480
 	}; 
 	
@@ -74,7 +74,7 @@ bool Scene::Start()
 	Platform* plat15 = new Platform;
 	Platform* plat16 = new Platform;
 
-	plat1->platform = app->physics->CreateRectangle(92,368, 135, 30, b2_staticBody);
+	plat1->platform = app->physics->CreateRectangle(85,368, 150, 30, b2_staticBody);
 	plat2->platform = app->physics->CreateRectangle(272, 337, 95, 30, b2_staticBody);
 	plat3->platform = app->physics->CreateRectangle(368, 304, 30, 30, b2_staticBody);
 	plat4->platform = app->physics->CreateRectangle(433, 337, 30, 30, b2_staticBody);
@@ -85,13 +85,11 @@ bool Scene::Start()
 	plat9->platform = app->physics->CreateRectangle(848, 240, 30, 95, b2_staticBody);
 
 	plat10->platform = app->physics->CreateRectangle(912, 175, 30, 30, b2_staticBody);
-	plat11->platform = app->physics->CreateRectangle(976, 143, 30, 30, b2_staticBody);
-	plat12->platform = app->physics->CreateRectangle(1040, 112, 30, 30, b2_staticBody);
-    plat13->platform = app->physics->CreateRectangle(1104, 80, 30, 30, b2_staticBody);
+	plat11->platform = app->physics->CreateRectangle(1009, 272, 95, 30, b2_staticBody);
+	plat12->platform = app->physics->CreateRectangle(1188, 337, 135, 30, b2_staticBody);
 
-	plat14->platform = app->physics->CreateRectangle(1295, 400, 30, 30, b2_staticBody);
-	plat15->platform = app->physics->CreateRectangle(1376, 368, 60, 30, b2_staticBody);
-	plat16->platform = app->physics->CreateRectangle(1509, 336, 135, 30, b2_staticBody);
+
+	
 	
 	//death floor created
 	deathFloor = new PhysBody;
@@ -118,11 +116,7 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && app->render->camera.x < 0)
-		app->render->camera.x += 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && app->render->camera.x > -320)
-		app->render->camera.x -= 2;
 
 	// Draw map
 	app->map->Draw();

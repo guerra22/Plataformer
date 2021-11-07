@@ -118,10 +118,10 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if(app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->render->camera.x < 0)
+	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && app->render->camera.x < 0)
 		app->render->camera.x += 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->render->camera.x > -320)
+	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && app->render->camera.x > -320)
 		app->render->camera.x -= 2;
 
 	// Draw map

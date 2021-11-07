@@ -4,6 +4,22 @@
 #include "Module.h"
 #include "ModulePhysics.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "Module.h"
+#include "Globals.h"
+#include "Point.h"
+#include "Animation.h"
+#include "Textures.h"
+#include "Render.h"
+
+
+struct Player1 {
+	PhysBody* player;
+	Animation idlePlayerAnim;
+	Animation jumpingPlayerAnim;
+	Animation walkingPlayerAnim;
+	Animation deathPlayerAnim;
+	bool IsDirectionRight;
+};
 
 class Player : public Module
 {
@@ -33,14 +49,25 @@ public:
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
-	struct PlayerObj {
-		PhysBody* playerBody;
-		bool isDead;
-		bool IsJumping;
+public:
+	SDL_Texture* playerTexture;
+
+public:
+	Player1* p;
+	Animation* currentAnim = nullptr;
+	Animation idlePlayerAnim, walkingPlayerAnim, jumpingPlayerAnim, deathPlayerAnim;
+	enum State
+	{
+		IDLE,
+		WALK,
+		JUMP,
+		DEATH
 	};
-
-	PlayerObj* player;
-
+	State pState;
+	bool IsDirectionRight;
+	float maxSpeedX;
+	float minSpeedX;
+	SDL_RendererFlip direction;
 
 };
 

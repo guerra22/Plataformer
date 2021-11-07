@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "ModulePhysics.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "Module.h"
 
 struct SDL_Texture;
 

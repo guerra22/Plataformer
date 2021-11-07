@@ -39,33 +39,47 @@ bool Player::Start()
     p->player = app->physics->CreateCircle(20, 300, 7, b2_dynamicBody);
     p->player->body->SetFixedRotation(true);
     //Idle anim
-    p->idlePlayerAnim.PushBack({ 262, 43, 16, 21 });
-    p->idlePlayerAnim.PushBack({ 294, 43, 16, 21 });
-    p->idlePlayerAnim.PushBack({ 327, 43, 16, 21 });
+    p->idlePlayerAnim.PushBack({ 8, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 86, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 164, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 242, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 320, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 398, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 476, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 554, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 632, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 710, 17, 50, 50 });
+    p->idlePlayerAnim.PushBack({ 788, 17, 50, 50 });
     p->idlePlayerAnim.loop = false;
     p->idlePlayerAnim.mustFlip = true;
-    p->idlePlayerAnim.speed = 0.02f;
+    p->idlePlayerAnim.speed = 0.01f;
     //Walking anim
-    p->walkingPlayerAnim.PushBack({ 390, 43, 16, 21 });
-    p->walkingPlayerAnim.PushBack({ 454, 43, 16, 21 });
+    p->walkingPlayerAnim.PushBack({ 8, 79, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 86, 77, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 164, 78, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 242, 81, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 320, 79, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 398, 77, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 476, 78, 50, 50 });
+    p->walkingPlayerAnim.PushBack({ 554, 81, 50, 50 });
     p->walkingPlayerAnim.loop = true;
     p->walkingPlayerAnim.mustFlip = true;
     p->walkingPlayerAnim.speed = 0.1f;
     //Jump anim
-    p->jumpingPlayerAnim.PushBack({ 390, 43, 16, 21 });
-    p->jumpingPlayerAnim.PushBack({ 422, 43, 16, 21 });
-    p->jumpingPlayerAnim.PushBack({ 454, 43, 16, 21 });
-    p->jumpingPlayerAnim.PushBack({ 486, 43, 16, 21 });
+    p->jumpingPlayerAnim.PushBack({ 8, 188, 50, 50 });
     p->jumpingPlayerAnim.loop = true;
     p->walkingPlayerAnim.mustFlip = true;
     p->jumpingPlayerAnim.speed = 0.1f;
     //Death anim
-    p->deathPlayerAnim.PushBack({ 262, 43, 16, 21 });
+    p->deathPlayerAnim.PushBack({ 5, 133, 50, 50 });
+    p->deathPlayerAnim.PushBack({ 79, 140, 50, 50 });
+    p->deathPlayerAnim.PushBack({ 156, 141, 50, 50 });
+    p->deathPlayerAnim.PushBack({ 233, 142, 50, 50 });
     p->deathPlayerAnim.loop = false;
     p->deathPlayerAnim.mustFlip = true;
     p->deathPlayerAnim.speed = 1.0f;
 
-    playerTexture = app->tex->Load("Assets/Spritesx16/characters.png");
+    playerTexture = app->tex->Load("Assets/textures/player/4state.png");
 
 
 	return true;

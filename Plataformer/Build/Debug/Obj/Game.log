@@ -1,4 +1,10 @@
-﻿  Scene.cpp
-C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
-C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
-  Game.vcxproj -> C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe
+﻿  Player.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(118,20): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(119,21): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(123,91): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(133,92): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
+  Game.vcxproj -> C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

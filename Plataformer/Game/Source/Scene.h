@@ -34,16 +34,28 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
     
 	struct Platform {
 		PhysBody* platform;
 	};
 
 
+	enum GameScreen
+	{
+		INTRO,
+		GAME,
+		DEFEAT,
+		VICTORY
+	};
+	
+	GameScreen gameScreen;
+
+
 	p2List<PhysBody*> walls;
 
 	PhysBody* deathFloor;
-
 
 
 	p2List<PhysBody*> box;

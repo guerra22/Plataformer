@@ -38,6 +38,7 @@ bool Player::Start()
  
     p->player = app->physics->CreateCircle(20, 300, 7, b2_dynamicBody);
     p->player->body->SetFixedRotation(true);
+    p->player->type = PhysBody::Type::PLAYER;
     //Idle anim
     p->idlePlayerAnim.PushBack({ 8, 17, 50, 50 });
     p->idlePlayerAnim.PushBack({ 86, 17, 50, 50 });
@@ -81,6 +82,7 @@ bool Player::Start()
 
     playerTexture = app->tex->Load("Assets/textures/player/4state.png");
 
+    show = false;
 
 	return true;
 }
@@ -110,14 +112,20 @@ bool Player::Update(float dt)
         break;
     }
 
-    app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 16), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 26,
-        &(currentAnim->GetCurrentFrame()), 1);
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { show = true; }
+
+    if (show == true)
+    {
+        app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 16), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 26,
+            &(currentAnim->GetCurrentFrame()), 1);
+    }
 
     bool ret = true;
     //Player movement
-    maxSpeedX = 0.6;
-    minSpeedX = -0.6;
+    maxSpeedX = 0.7;
+    minSpeedX = -0.7;
     //Right
+    isJumping = false;
     if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
     {
         p->player->body->SetLinearVelocity({ 0.7, p->player->body->GetLinearVelocity().y });
@@ -126,6 +134,7 @@ bool Player::Update(float dt)
         p->idlePlayerAnim.Reset();
         p->IsDirectionRight = true;
         direction = SDL_FLIP_NONE;
+        if(isJumping == true){ p->player->body->ApplyLinearImpulse({ 0.04f, 0.0f }, { 0, 0 }, true); }
     }
     //Left
     if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
@@ -135,15 +144,17 @@ bool Player::Update(float dt)
         p->walkingPlayerAnim.Update();
         p->idlePlayerAnim.Reset();
         direction = SDL_FLIP_HORIZONTAL;
+        if (isJumping == true) { p->player->body->ApplyLinearImpulse({ -0.04f, 0.0f }, { 0, 0 }, true); }
     }
     //Jump
     if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
     {
-        p->player->body->ApplyLinearImpulse({ 0, -0.21f }, { 0, 0 }, true);
+        p->player->body->ApplyLinearImpulse({ 0.0f, -0.31f }, { 0, 0 }, true);
         pState = JUMP;
         p->jumpingPlayerAnim.Update();
         p->idlePlayerAnim.Reset();
         p->walkingPlayerAnim.Reset();
+        isJumping = true;
     }
 
 
@@ -167,10 +178,8 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	bodyA = p->player;
-
-	if (bodyB->body->GetType() == 1)
+	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::FLOOR)
 	{
-
+        p->player->body->SetTransform({ PIXEL_TO_METERS(20), PIXEL_TO_METERS(300) }, 0.0f);
 	}
 }

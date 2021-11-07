@@ -38,6 +38,14 @@ public:
 	b2Body* body;
 	Module* listener;
 	bool pendingToDelete = false;
+
+	enum class Type {
+		FLOOR,
+		PLAYER,
+		PLATFORM
+	};
+
+	Type type;
 };
 
 // Module --------------------------------------

@@ -1,4 +1,16 @@
-﻿  Scene.cpp
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
-C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
-  Game.vcxproj -> C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe
+﻿  App.cpp
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Player.cpp
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(125,20): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(126,21): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(131,91): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
+C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Game\Source\Player.cpp(142,92): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
+  Generando código...
+  Game.vcxproj -> C:\Users\Anneta\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

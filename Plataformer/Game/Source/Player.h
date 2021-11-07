@@ -69,6 +69,9 @@ public:
 	float minSpeedX;
 	SDL_RendererFlip direction;
 
+	bool isJumping;
+	bool show;
+
 };
 
 #endif

@@ -75,18 +75,30 @@ bool Scene::Start()
 	Platform* plat16 = new Platform;
 
 	plat1->platform = app->physics->CreateRectangle(85,368, 150, 30, b2_staticBody);
+	plat1->platform->type = PhysBody::Type::PLATFORM;
 	plat2->platform = app->physics->CreateRectangle(272, 337, 95, 30, b2_staticBody);
+	plat2->platform->type = PhysBody::Type::PLATFORM;
 	plat3->platform = app->physics->CreateRectangle(368, 304, 30, 30, b2_staticBody);
+	plat3->platform->type = PhysBody::Type::PLATFORM;
 	plat4->platform = app->physics->CreateRectangle(433, 337, 30, 30, b2_staticBody);
+	plat4->platform->type = PhysBody::Type::PLATFORM;
 	plat5->platform = app->physics->CreateRectangle(495, 304, 30, 30, b2_staticBody);
+	plat5->platform->type = PhysBody::Type::PLATFORM;
 	plat6->platform = app->physics->CreateRectangle(559, 337, 30, 30, b2_staticBody);
+	plat6->platform->type = PhysBody::Type::PLATFORM;
 	plat7->platform = app->physics->CreateRectangle(624, 304, 30, 30, b2_staticBody);
+	plat7->platform->type = PhysBody::Type::PLATFORM;
     plat8->platform = app->physics->CreateRectangle(720, 240, 95, 30, b2_staticBody);
+	plat8->platform->type = PhysBody::Type::PLATFORM;
 	plat9->platform = app->physics->CreateRectangle(848, 240, 30, 95, b2_staticBody);
+	plat9->platform->type = PhysBody::Type::PLATFORM;
 
 	plat10->platform = app->physics->CreateRectangle(912, 175, 30, 30, b2_staticBody);
+	plat10->platform->type = PhysBody::Type::PLATFORM;
 	plat11->platform = app->physics->CreateRectangle(1009, 272, 95, 30, b2_staticBody);
+	plat11->platform->type = PhysBody::Type::PLATFORM;
 	plat12->platform = app->physics->CreateRectangle(1188, 337, 135, 30, b2_staticBody);
+	plat12->platform->type = PhysBody::Type::PLATFORM;
 
 
 	
@@ -94,6 +106,7 @@ bool Scene::Start()
 	//death floor created
 	deathFloor = new PhysBody;
 	deathFloor = app->physics->CreateRectangle(250, 470, 2800, 30, b2_kinematicBody);
+	deathFloor->type = PhysBody::Type::FLOOR;
 	
 
 	return true;
@@ -108,26 +121,42 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	
-    // L02: DONE 3: Request Load / Save when pressing L/S
-	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		app->LoadGameRequest();
-
-	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		app->SaveGameRequest();
-
-
-
-	// Draw map
-	app->map->Draw();
-
 	// L03: DONE 7: Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-				   app->map->mapData.width, app->map->mapData.height,
-				   app->map->mapData.tileWidth, app->map->mapData.tileHeight,
-				   app->map->mapData.tilesets.count());
+		app->map->mapData.width, app->map->mapData.height,
+		app->map->mapData.tileWidth, app->map->mapData.tileHeight,
+		app->map->mapData.tilesets.count());
 
-	app->win->SetTitle(title.GetString());
+	switch (gameScreen)
+	{
+	case Scene::INTRO:
+
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
+		break;
+
+	case Scene::GAME:
+		// L02: DONE 3: Request Load / Save when pressing L/S
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+			app->LoadGameRequest();
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+			app->SaveGameRequest();
+
+
+
+		// Draw map
+		app->map->Draw();
+
+
+		app->win->SetTitle(title.GetString());
+		break;
+	case Scene::DEFEAT:
+		break;
+	case Scene::VICTORY:
+		break;
+	default:
+		break;
+	}  
 
 	return true;
 }
@@ -149,4 +178,12 @@ bool Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+void Scene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::FLOOR)
+	{
+		gameScreen = GameScreen::DEFEAT;
+	}
 }

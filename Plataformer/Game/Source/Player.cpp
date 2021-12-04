@@ -83,6 +83,7 @@ bool Player::Start()
     playerTexture = app->tex->Load("Assets/textures/player/4state.png");
 
     show = false;
+	p->godmode = false;
 
 	return true;
 }
@@ -108,11 +109,11 @@ bool Player::Update(float dt)
         break;
     case DEATH:
         currentAnim = &p->deathPlayerAnim;
-        direction = SDL_FLIP_HORIZONTAL;
         break;
     }
 
     if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { show = true; }
+	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT) { p->godmode = true; }
 
     if (show == true)
     {
@@ -122,40 +123,56 @@ bool Player::Update(float dt)
 
     bool ret = true;
     //Player movement
-    maxSpeedX = 0.7;
-    minSpeedX = -0.7;
-    //Right
-    isJumping = false;
-    if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
-    {
-        p->player->body->SetLinearVelocity({ 0.7, p->player->body->GetLinearVelocity().y });
-        pState = WALK;
-        p->walkingPlayerAnim.Update();
-        p->idlePlayerAnim.Reset();
-        p->IsDirectionRight = true;
-        direction = SDL_FLIP_NONE;
-        if(isJumping == true){ p->player->body->ApplyLinearImpulse({ 0.04f, 0.0f }, { 0, 0 }, true); }
-    }
-    //Left
-    if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
-    {
-        p->player->body->SetLinearVelocity({ -0.7, p->player->body->GetLinearVelocity().y });
-        pState = WALK;
-        p->walkingPlayerAnim.Update();
-        p->idlePlayerAnim.Reset();
-        direction = SDL_FLIP_HORIZONTAL;
-        if (isJumping == true) { p->player->body->ApplyLinearImpulse({ -0.04f, 0.0f }, { 0, 0 }, true); }
-    }
-    //Jump
-    if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
-    {
-        p->player->body->ApplyLinearImpulse({ 0.0f, -0.31f }, { 0, 0 }, true);
-        pState = JUMP;
-        p->jumpingPlayerAnim.Update();
-        p->idlePlayerAnim.Reset();
-        p->walkingPlayerAnim.Reset();
-        isJumping = true;
-    }
+    maxSpeedX = 1;
+    minSpeedX = -1;
+  
+	if (p->godmode == true)
+	{
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
+		{
+			p->player->body->SetLinearVelocity({ 1, p->player->body->GetLinearVelocity().y });
+			pState = WALK;
+			p->walkingPlayerAnim.Update();
+			p->idlePlayerAnim.Reset();
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
+		{
+			p->player->body->SetLinearVelocity({ -1, p->player->body->GetLinearVelocity().y });
+			pState = WALK;
+			p->walkingPlayerAnim.Update();
+			p->idlePlayerAnim.Reset();
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().y < maxSpeedX))
+		{
+			p->player->body->ApplyLinearImpulse({ 0.0f, -0.1f }, { 0, 0 }, true);
+		}
+	}
+	else {
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
+		{
+			p->player->body->SetLinearVelocity({ 1, p->player->body->GetLinearVelocity().y });
+			pState = WALK;
+			p->walkingPlayerAnim.Update();
+			p->idlePlayerAnim.Reset();
+		}
+		//Left
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
+		{
+			p->player->body->SetLinearVelocity({ -1, p->player->body->GetLinearVelocity().y });
+			pState = WALK;
+			p->walkingPlayerAnim.Update();
+			p->idlePlayerAnim.Reset();	
+		}
+		//Jump
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
+		{
+			p->player->body->ApplyLinearImpulse({ 0.0f, -0.25f }, { 0, 0 }, true);
+			pState = JUMP;
+			p->jumpingPlayerAnim.Update();
+			p->idlePlayerAnim.Reset();
+			p->walkingPlayerAnim.Reset();
+		}
+	}
 
 
 	return true;

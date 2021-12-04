@@ -19,6 +19,7 @@ struct Player1 {
 	Animation walkingPlayerAnim;
 	Animation deathPlayerAnim;
 	bool IsDirectionRight;
+	bool godmode;
 };
 
 class Player : public Module
@@ -67,9 +68,7 @@ public:
 	bool IsDirectionRight;
 	float maxSpeedX;
 	float minSpeedX;
-	SDL_RendererFlip direction;
 
-	bool isJumping;
 	bool show;
 
 };

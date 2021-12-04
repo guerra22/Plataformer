@@ -57,6 +57,7 @@ public:
 
 	PhysBody* deathFloor;
 
+	SDL_Texture* StartScreen;
 
 	p2List<PhysBody*> box;
 

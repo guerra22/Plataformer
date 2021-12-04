@@ -37,6 +37,7 @@ bool Scene::Start()
 	//app->map->Load("iso_walk.tmx");
 	app->map->Load("map.tmx");
 
+	StartScreen = app->tex->Load("Assets/textures/startScreen.png");
 	
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
@@ -132,6 +133,7 @@ bool Scene::Update(float dt)
 	case Scene::INTRO:
 
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
+		app->render->DrawTexture(StartScreen, 0, 0, NULL, 0.0f, 0);
 		break;
 
 	case Scene::GAME:
@@ -142,11 +144,8 @@ bool Scene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 			app->SaveGameRequest();
 
-
-
 		// Draw map
 		app->map->Draw();
-
 
 		app->win->SetTitle(title.GetString());
 		break;

@@ -1,12 +1,4 @@
-﻿  Enemy.cpp
-C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+﻿  Scene.cpp
 C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
 C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
-  Player.cpp
-C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
-C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
-  Generando código...
   Game.vcxproj -> C:\Users\ottots\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

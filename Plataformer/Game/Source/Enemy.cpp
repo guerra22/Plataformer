@@ -41,31 +41,22 @@ bool Enemy::Start()
     flyingEnemy->enemy->body->SetFixedRotation(true);
     flyingEnemy->enemy->type = PhysBody::Type::ENEMY;
     //Idle anim
-    flyingEnemy->idleAnim.PushBack({ 8, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 86, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 164, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 242, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 320, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 398, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 476, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 554, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 632, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 710, 17, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 788, 17, 50, 50 });
+    flyingEnemy->idleAnim.PushBack({ 4, 347, 50, 50 });
+    flyingEnemy->idleAnim.PushBack({ 52, 346, 50, 50 });
+    flyingEnemy->idleAnim.PushBack({ 103, 345, 50, 50 });
     flyingEnemy->idleAnim.loop = false;
     flyingEnemy->idleAnim.mustFlip = true;
     flyingEnemy->idleAnim.speed = 0.01f;
  
     //Death anim
-    flyingEnemy->deathAnim.PushBack({ 5, 133, 50, 50 });
-    flyingEnemy->deathAnim.PushBack({ 79, 140, 50, 50 });
-    flyingEnemy->deathAnim.PushBack({ 156, 141, 50, 50 });
-    flyingEnemy->deathAnim.PushBack({ 233, 142, 50, 50 });
+    flyingEnemy->deathAnim.PushBack({ 148, 347, 50, 50 });
+    flyingEnemy->deathAnim.PushBack({ 196, 346, 50, 50 });
+    flyingEnemy->deathAnim.PushBack({ 247, 345, 50, 50 });
     flyingEnemy->deathAnim.loop = false;
     flyingEnemy->deathAnim.mustFlip = true;
     flyingEnemy->deathAnim.speed = 1.0f;
 
-    enemyTexture = app->tex->Load("Assets/textures/player/4state.png");
+    enemyTexture = app->tex->Load("Assets/textures/Tileset.png");
 
     show = false;
 

@@ -80,7 +80,7 @@ bool Player::Start()
     p->deathPlayerAnim.mustFlip = true;
     p->deathPlayerAnim.speed = 1.0f;
 
-    playerTexture = app->tex->Load("Assets/textures/player/4state.png");
+    playerTexture = app->tex->Load("Assets/textures/Tileset.png");
 
     show = false;
 	p->godmode = false;

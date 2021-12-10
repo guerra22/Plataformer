@@ -103,11 +103,15 @@ bool Scene::Start()
 	
 	//death floor created
 	deathFloor = new PhysBody;
-	deathFloor = app->physics->CreateRectangle(250, 470, 2800, 30, b2_kinematicBody);
+	deathFloor = app->physics->CreateRectangle(250, 470, 2800, 30, b2_staticBody);
 	deathFloor->listener = this;
 	deathFloor->type = PhysBody::Type::FLOOR;
-	
-	godMode = false;
+
+	//win block created
+	winBlock = new PhysBody;
+	winBlock = app->physics->CreateRectangle(600, 250, 30, 30, b2_staticBody);
+	winBlock->listener = this;
+	winBlock->type = PhysBody::Type::WIN;
 
 	return true;
 }
@@ -126,17 +130,25 @@ bool Scene::Update(float dt)
 		app->map->mapData.width, app->map->mapData.height,
 		app->map->mapData.tileWidth, app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.count());
-
+	
 	switch (gameScreen)
 	{
 	case Scene::INTRO:
 
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+			gameScreen = GameScreen::GAME;
+			app->gameState = 1;
+		}
 		app->render->DrawTexture(StartScreen, 0, 0, NULL, 0.0f, 0);
 		break;
 
 	case Scene::GAME:
-		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { godMode = !godMode; }
+		//Toggle godmode
+		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { app->godeMode = !app->godeMode; }
+
+		//game state change
+		if (app->gameState == 2) { gameScreen = GameScreen::DEFEAT; }
+		if (app->gameState == 3) { gameScreen = GameScreen::VICTORY; }
 
 		// L02: DONE 3: Request Load / Save when pressing L/S
 		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
@@ -151,11 +163,17 @@ bool Scene::Update(float dt)
 		break;
 	case Scene::DEFEAT:
 		app->render->DrawTexture(GameOverScreen, 0, 0, NULL, 0.0f, 0);
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+			app->gameState = 1;
+			gameScreen = GameScreen::GAME; 
+		}
 		break;
 	case Scene::VICTORY:
 		app->render->DrawTexture(WinScreen, 0, 0, NULL, 0.0f, 0);
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
+			app->gameState = 1;
+			gameScreen = GameScreen::GAME; 
+		}
 		break;
 	default:
 		break;
@@ -185,6 +203,12 @@ bool Scene::CleanUp()
 
 void Scene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::FLOOR && bodyB->type == PhysBody::Type::PLAYER && godMode == false) { gameScreen = GameScreen::DEFEAT; }
-	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && godMode == false) { gameScreen = GameScreen::VICTORY; }
+	if (bodyA->type == PhysBody::Type::FLOOR && bodyB->type == PhysBody::Type::PLAYER && app->godeMode == false && app->gameState == 1) {
+		app->gameState = 2;
+		gameScreen = GameScreen::DEFEAT;
+	}
+	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && app->gameState == 1) {
+		app->gameState = 3;
+		gameScreen = GameScreen::VICTORY;
+	}
 }

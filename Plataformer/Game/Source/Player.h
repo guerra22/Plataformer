@@ -18,8 +18,6 @@ struct Player1 {
 	Animation jumpingPlayerAnim;
 	Animation walkingPlayerAnim;
 	Animation deathPlayerAnim;
-	bool IsDirectionRight;
-	bool godmode;
 };
 
 class Player : public Module
@@ -68,9 +66,6 @@ public:
 
 	float maxSpeedX;
 	float minSpeedX;
-
-	bool show;
-
 };
 
 #endif

@@ -16,7 +16,7 @@ struct FlyingEnemy {
 	PhysBody* enemy;
 	Animation idleAnim;
 	Animation deathAnim;
-	bool show;
+	bool isDead;
 };
 
 struct LandEnemy {
@@ -24,7 +24,7 @@ struct LandEnemy {
 	Animation idleAnim;
 	Animation walkingAnim;
 	Animation deathAnim;
-	bool show;
+	bool isDead;
 };
 
 class Enemy : public Module

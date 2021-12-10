@@ -56,7 +56,7 @@ bool Enemy::Start()
     flyingEnemy->deathAnim.speed = 1.0f;
 	//texture and render
     flyingEnemyTexture = app->tex->Load("Assets/textures/Tileset.png");
-	flyingEnemy->show = false;
+	flyingEnemy->isDead = false;
 
 
 	//Initializing land enemy struct data
@@ -84,7 +84,7 @@ bool Enemy::Start()
 	landEnemy->deathAnim.speed = 1.0f;
 	//texture and render
 	landEnemyTexture = app->tex->Load("Assets/textures/Tileset.png");
-	landEnemy->show = false;
+	landEnemy->isDead = false;
 
     return true;
 }
@@ -123,16 +123,12 @@ bool Enemy::Update(float dt)
 	}
 
 	//Enemy Render
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { 
-		flyingEnemy->show = true;
-		landEnemy->show = true;
-	}
-    if (flyingEnemy->show == true)
+    if (app->gameState == 1 && flyingEnemy->isDead == false)
     {
         app->render->DrawTexture(flyingEnemyTexture, METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().x - 20), 
             METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentFlyingAnim->GetCurrentFrame()), 1);
     }
-	if (landEnemy->show == true)
+	if (app->gameState == 1 && landEnemy->isDead == false)
 	{
 		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 20),
 			METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentLandAnim->GetCurrentFrame()), 1);
@@ -165,12 +161,5 @@ bool Enemy::CleanUp()
 
 void Enemy::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::ENEMY_F && bodyB->type == PhysBody::Type::PLAYER) { 
-		flyingEnemy->show = false;
-		landEnemy->show = false;
-	}
-	if (bodyA->type == PhysBody::Type::ENEMY_L && bodyB->type == PhysBody::Type::PLAYER) { 
-		flyingEnemy->show = false;
-		landEnemy->show = false;
-	}
+
 }

@@ -55,14 +55,13 @@ public:
 	p2List<PhysBody*> walls;
 
 	PhysBody* deathFloor;
+	PhysBody* winBlock;
 
 	SDL_Texture* StartScreen;
 	SDL_Texture* GameOverScreen;
 	SDL_Texture* WinScreen;
 
 	p2List<PhysBody*> box;
-
-	bool godMode;
 
 private:
 	SDL_Texture* img;

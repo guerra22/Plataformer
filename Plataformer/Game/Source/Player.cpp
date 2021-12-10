@@ -83,9 +83,6 @@ bool Player::Start()
 
     playerTexture = app->tex->Load("Assets/textures/Tileset.png");
 
-    show = false;
-	p->godmode = false;
-
 	return true;
 }
 
@@ -113,14 +110,9 @@ bool Player::Update(float dt)
         break;
     }
 
-	//toggle God Mode
-	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { p->godmode = !p->godmode; }
 	//Player Render
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) {
-		p->player->body->SetTransform({ PIXEL_TO_METERS(20), PIXEL_TO_METERS(300) }, 0.0f);
-		show = true; 
-	}
-    if (show == true)
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { p->player->body->SetTransform({ PIXEL_TO_METERS(20), PIXEL_TO_METERS(300) }, 0.0f); }
+    if (app->gameState == 1)
     {
         app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
             &(currentAnim->GetCurrentFrame()), 1);
@@ -131,7 +123,7 @@ bool Player::Update(float dt)
     maxSpeedX = 2;
     minSpeedX = -2;
   
-	if (p->godmode == true)
+	if (app->godeMode == true)
 	{
 		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
 		{
@@ -166,7 +158,7 @@ bool Player::Update(float dt)
 			p->player->body->SetLinearVelocity({ -1, p->player->body->GetLinearVelocity().y });
 			pState = WALK;
 			p->walkingPlayerAnim.Update();
-			p->idlePlayerAnim.Reset();	
+			p->idlePlayerAnim.Reset();
 		}
 		//Jump
 		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
@@ -197,6 +189,5 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::FLOOR && p->godmode == false) { show = false; }
-	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::WIN) { show = false; }
+
 }

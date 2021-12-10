@@ -26,6 +26,10 @@ class Player;
 class App
 {
 public:
+	// 0-INTRO 1-GAME 2-GAMEOVER 3-WIN
+	int gameState;
+	// False-OFF True-ON
+	bool godeMode;
 
 	// Constructor
 	App(int argc, char* args[]);

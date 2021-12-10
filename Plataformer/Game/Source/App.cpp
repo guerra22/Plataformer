@@ -117,6 +117,9 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
+	gameState = 0;
+	godeMode = false;
+
 	startupTime.Start();
 	lastSecFrameTime.Start();
 

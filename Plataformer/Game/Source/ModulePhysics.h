@@ -43,7 +43,12 @@ public:
 		FLOOR,
 		PLAYER,
 		ENEMY,
+<<<<<<< Updated upstream
 		PLATFORM
+=======
+		PLATFORM,
+		WIN
+>>>>>>> Stashed changes
 	};
 
 	Type type;

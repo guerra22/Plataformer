@@ -37,27 +37,27 @@ bool Scene::Start()
 	//app->map->Load("iso_walk.tmx");
 	app->map->Load("map.tmx");
 
+	//loading Screens
 	StartScreen = app->tex->Load("Assets/textures/startScreen.png");
+	GameOverScreen = app->tex->Load("Assets/textures/GameOverScreen.png");
+	WinScreen = app->tex->Load("Assets/textures/WinScreen.png");
 	
 	// Load music
 	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	LOG("Creating Physics 2D environment");
-	
 	int points[8] = {
 			0,0,
 			1280,0,
 			1280,480,
 			0,480
 	}; 
-	
 
 	PhysBody* pb_wall1 = app->physics->CreateChain(0, 0, points, 8, b2_staticBody);
 	walls.add(pb_wall1);
-
+	pb_wall1->type = PhysBody::Type::PLATFORM;
 
 	// paltforms creation
-
 	Platform* plat1 = new Platform;
 	Platform* plat2 = new Platform;
 	Platform* plat3 = new Platform;
@@ -100,15 +100,14 @@ bool Scene::Start()
 	plat11->platform->type = PhysBody::Type::PLATFORM;
 	plat12->platform = app->physics->CreateRectangle(1188, 337, 135, 30, b2_staticBody);
 	plat12->platform->type = PhysBody::Type::PLATFORM;
-
-
-	
 	
 	//death floor created
 	deathFloor = new PhysBody;
 	deathFloor = app->physics->CreateRectangle(250, 470, 2800, 30, b2_kinematicBody);
+	deathFloor->listener = this;
 	deathFloor->type = PhysBody::Type::FLOOR;
 	
+	godMode = false;
 
 	return true;
 }
@@ -137,6 +136,7 @@ bool Scene::Update(float dt)
 		break;
 
 	case Scene::GAME:
+		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { godMode = !godMode; }
 		// L02: DONE 3: Request Load / Save when pressing L/S
 		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 			app->LoadGameRequest();
@@ -150,8 +150,12 @@ bool Scene::Update(float dt)
 		app->win->SetTitle(title.GetString());
 		break;
 	case Scene::DEFEAT:
+		app->render->DrawTexture(GameOverScreen, 0, 0, NULL, 0.0f, 0);
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
 		break;
 	case Scene::VICTORY:
+		app->render->DrawTexture(WinScreen, 0, 0, NULL, 0.0f, 0);
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { gameScreen = GameScreen::GAME; }
 		break;
 	default:
 		break;
@@ -181,7 +185,7 @@ bool Scene::CleanUp()
 
 void Scene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::FLOOR)
+	if (bodyA->type == PhysBody::Type::FLOOR && bodyB->type == PhysBody::Type::PLAYER && godMode == false)
 	{
 		gameScreen = GameScreen::DEFEAT;
 	}

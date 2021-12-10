@@ -38,6 +38,7 @@ bool Player::Start()
  
     p->player = app->physics->CreateCircle(20, 300, 7, b2_dynamicBody);
     p->player->body->SetFixedRotation(true);
+	p->player->listener = this;
     p->player->type = PhysBody::Type::PLAYER;
     //Idle anim
     p->idlePlayerAnim.PushBack({ 8, 17, 50, 50 });
@@ -112,16 +113,20 @@ bool Player::Update(float dt)
         break;
     }
 
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { show = true; }
-	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT) { p->godmode = true; }
-
+	//toggle God Mode
+	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { p->godmode = !p->godmode; }
+	//Player Render
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) {
+		p->player->body->SetTransform({ PIXEL_TO_METERS(20), PIXEL_TO_METERS(300) }, 0.0f);
+		show = true; 
+	}
     if (show == true)
     {
         app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
             &(currentAnim->GetCurrentFrame()), 1);
     }
-
     bool ret = true;
+
     //Player movement
     maxSpeedX = 1;
     minSpeedX = -1;
@@ -173,8 +178,6 @@ bool Player::Update(float dt)
 			p->walkingPlayerAnim.Reset();
 		}
 	}
-
-
 	return true;
 }
 
@@ -188,15 +191,12 @@ bool Player::PostUpdate()
 bool Player::CleanUp()
 {
 	LOG("Freeing Player");
-
 	return true;
 }
 
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::FLOOR)
-	{
-        p->player->body->SetTransform({ PIXEL_TO_METERS(20), PIXEL_TO_METERS(300) }, 0.0f);
-	}
+	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::FLOOR && p->godmode == false) { show = false; }
+	if (bodyA->type == PhysBody::Type::PLAYER && bodyB->type == PhysBody::Type::WIN) { show = false; }
 }

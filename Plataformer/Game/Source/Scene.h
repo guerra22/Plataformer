@@ -41,7 +41,6 @@ public:
 		PhysBody* platform;
 	};
 
-
 	enum GameScreen
 	{
 		INTRO,
@@ -58,16 +57,18 @@ public:
 	PhysBody* deathFloor;
 
 	SDL_Texture* StartScreen;
+	SDL_Texture* GameOverScreen;
+	SDL_Texture* WinScreen;
 
 	p2List<PhysBody*> box;
 
+	bool godMode;
 
 private:
 	SDL_Texture* img;
 
 	b2World* world;
 	b2Body* ground;
-	b2Vec2 p;
 
 	
 

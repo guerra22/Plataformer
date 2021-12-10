@@ -128,28 +128,28 @@ bool Player::Update(float dt)
     bool ret = true;
 
     //Player movement
-    maxSpeedX = 1;
-    minSpeedX = -1;
+    maxSpeedX = 2;
+    minSpeedX = -2;
   
 	if (p->godmode == true)
 	{
 		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
 		{
-			p->player->body->SetLinearVelocity({ 1, p->player->body->GetLinearVelocity().y });
+			p->player->body->SetLinearVelocity({ 2, p->player->body->GetLinearVelocity().y });
 			pState = WALK;
 			p->walkingPlayerAnim.Update();
 			p->idlePlayerAnim.Reset();
 		}
 		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
 		{
-			p->player->body->SetLinearVelocity({ -1, p->player->body->GetLinearVelocity().y });
+			p->player->body->SetLinearVelocity({ -2, p->player->body->GetLinearVelocity().y });
 			pState = WALK;
 			p->walkingPlayerAnim.Update();
 			p->idlePlayerAnim.Reset();
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().y < maxSpeedX))
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
-			p->player->body->ApplyLinearImpulse({ 0.0f, -0.1f }, { 0, 0 }, true);
+			p->player->body->ApplyLinearImpulse({ 0.0f, -0.05f }, { 0, 0 }, true);
 		}
 	}
 	else {

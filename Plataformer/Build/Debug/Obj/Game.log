@@ -1,4 +1,40 @@
-﻿  Scene.cpp
-C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
-C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
-  Game.vcxproj -> C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe
+﻿  Enemy.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+  Main.cpp
+  App.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(179,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(204,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(210,47): warning C4244: 'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  Audio.cpp
+  Input.cpp
+  Map.cpp
+  ModulePhysics.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(96,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(97,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(141,21): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(191,44): warning C4305: '=': truncamiento de 'double' a 'float32'
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(341,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(342,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(348,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+  PerfTimer.cpp
+  Player.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+  Scene.cpp
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005: 'LOG': redefinición de macro
+C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message : vea la definición anterior de 'LOG'
+  Render.cpp
+  Textures.cpp
+  Timer.cpp
+  Window.cpp
+  Generando código...
+  Game.vcxproj -> C:\Users\guerr\OneDrive\Documentos\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

@@ -18,7 +18,7 @@
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
-	frames = 0;
+
 
 	win = new Window();
 	input = new Input();
@@ -44,6 +44,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	// Render last to swap buffer
 	AddModule(render);
+
+
+	ptimer = new PerfTimer();
+	frameDuration = new PerfTimer();
 }
 
 // Destructor
@@ -87,6 +91,8 @@ bool App::Awake()
 		// L01: DONE 4: Read the title from the config file
 		title.Create(configApp.child("title").child_value());
 		organization.Create(configApp.child("organization").child_value());
+
+		maxFrameRate = configApp.child("frcap").attribute("value").as_int();
 	}
 
 	if (ret == true)
@@ -111,6 +117,9 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
+	startupTime.Start();
+	lastSecFrameTime.Start();
+
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
@@ -163,6 +172,12 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	frameCount++;
+	lastSecFrameCount++;
+
+	// L08: DONE 4: Calculate the dt: differential time since last frame
+	dt = frameDuration->ReadMs();
+	frameDuration->Start();
 }
 
 // ---------------------------------------------
@@ -171,6 +186,31 @@ void App::FinishUpdate()
 	// L02: DONE 1: This is a good place to call Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
+
+	float secondsSinceStartup = startupTime.ReadSec();
+
+	if (lastSecFrameTime.Read() > 1000) {
+		lastSecFrameTime.Start();
+		framesPerSecond = lastSecFrameCount;
+		lastSecFrameCount = 0;
+		averageFps = (averageFps + framesPerSecond) / 2;
+	}
+
+	static char title[256];
+	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
+		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+
+	// L08: DONE 2: Use SDL_Delay to make sure you get your capped framerate
+	float delay = float(maxFrameRate) - frameDuration->ReadMs();
+	//LOG("F: %f Delay:%f", frameDuration->ReadMs(), delay);
+
+	// L08: DONE 3: Measure accurately the amount of time SDL_Delay() actually waits compared to what was expected
+	PerfTimer* delayt = new PerfTimer();
+	delayt->Start();
+	if (maxFrameRate > 0 && delay > 0) SDL_Delay(delay);
+	LOG("Expected %f milliseconds and the real delay is % f", delay, delayt->ReadMs());
+
+	app->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration

@@ -42,6 +42,7 @@ public:
 	enum class Type {
 		FLOOR,
 		PLAYER,
+		ENEMY,
 		PLATFORM
 	};
 

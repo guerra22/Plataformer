@@ -117,7 +117,7 @@ bool Player::Update(float dt)
 
     if (show == true)
     {
-        app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 16), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 26,
+        app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
             &(currentAnim->GetCurrentFrame()), 1);
     }
 

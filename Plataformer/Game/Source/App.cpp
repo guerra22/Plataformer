@@ -10,6 +10,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "Player.h"
+#include "Enemy.h"
 
 #include <iostream>
 #include <sstream>
@@ -27,6 +28,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	physics = new ModulePhysics();
+	enemy = new Enemy();
 	player = new Player();
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -38,6 +40,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(scene);
+	AddModule(enemy);
 	AddModule(player);
 	// Render last to swap buffer
 	AddModule(render);

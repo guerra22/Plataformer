@@ -65,7 +65,7 @@ public:
 		DEATH
 	};
 	State pState;
-	bool IsDirectionRight;
+
 	float maxSpeedX;
 	float minSpeedX;
 

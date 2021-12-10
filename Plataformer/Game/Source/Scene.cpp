@@ -137,10 +137,10 @@ bool Scene::Update(float dt)
 
 	case Scene::GAME:
 		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { godMode = !godMode; }
+
 		// L02: DONE 3: Request Load / Save when pressing L/S
 		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 			app->LoadGameRequest();
-
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 			app->SaveGameRequest();
 
@@ -185,8 +185,6 @@ bool Scene::CleanUp()
 
 void Scene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::FLOOR && bodyB->type == PhysBody::Type::PLAYER && godMode == false)
-	{
-		gameScreen = GameScreen::DEFEAT;
-	}
+	if (bodyA->type == PhysBody::Type::FLOOR && bodyB->type == PhysBody::Type::PLAYER && godMode == false) { gameScreen = GameScreen::DEFEAT; }
+	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && godMode == false) { gameScreen = GameScreen::VICTORY; }
 }

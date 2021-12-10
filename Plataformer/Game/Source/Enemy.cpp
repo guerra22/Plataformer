@@ -33,13 +33,13 @@ bool Enemy::Awake()
 
 bool Enemy::Start()
 {
-    //Initializing player struct data
+    //Initializing flying enemy struct data
     flyingEnemy = new FlyingEnemy;
-    eState = IDLE;
-
-    flyingEnemy->enemy = app->physics->CreateCircle(20, 300, 7, b2_kinematicBody);
+    eflyingState = IDLE;
+    flyingEnemy->enemy = app->physics->CreateCircle(100, 300, 7, b2_kinematicBody);
     flyingEnemy->enemy->body->SetFixedRotation(true);
-    flyingEnemy->enemy->type = PhysBody::Type::ENEMY;
+	flyingEnemy->enemy->listener = this;
+    flyingEnemy->enemy->type = PhysBody::Type::ENEMY_F;
     //Idle anim
     flyingEnemy->idleAnim.PushBack({ 4, 347, 50, 50 });
     flyingEnemy->idleAnim.PushBack({ 52, 346, 50, 50 });
@@ -47,7 +47,6 @@ bool Enemy::Start()
     flyingEnemy->idleAnim.loop = false;
     flyingEnemy->idleAnim.mustFlip = true;
     flyingEnemy->idleAnim.speed = 0.01f;
- 
     //Death anim
     flyingEnemy->deathAnim.PushBack({ 148, 347, 50, 50 });
     flyingEnemy->deathAnim.PushBack({ 196, 346, 50, 50 });
@@ -55,10 +54,37 @@ bool Enemy::Start()
     flyingEnemy->deathAnim.loop = false;
     flyingEnemy->deathAnim.mustFlip = true;
     flyingEnemy->deathAnim.speed = 1.0f;
+	//texture and render
+    flyingEnemyTexture = app->tex->Load("Assets/textures/Tileset.png");
+	flyingEnemy->show = false;
 
-    enemyTexture = app->tex->Load("Assets/textures/Tileset.png");
 
-    show = false;
+	//Initializing land enemy struct data
+	landEnemy = new LandEnemy;
+	elandState = IDLE;
+	landEnemy->enemy = app->physics->CreateCircle(200, 300, 7, b2_kinematicBody);
+	landEnemy->enemy->body->SetFixedRotation(true);
+	landEnemy->enemy->listener = this;
+	landEnemy->enemy->type = PhysBody::Type::ENEMY_L;
+	//Idle anim
+	landEnemy->idleAnim.PushBack({ 4, 347, 50, 50 });
+	landEnemy->idleAnim.PushBack({ 52, 346, 50, 50 });
+	landEnemy->idleAnim.PushBack({ 103, 345, 50, 50 });
+	landEnemy->idleAnim.loop = false;
+	landEnemy->idleAnim.mustFlip = true;
+	landEnemy->idleAnim.speed = 0.01f;
+	//Walking anim
+	//---
+	//Death anim
+	landEnemy->deathAnim.PushBack({ 148, 347, 50, 50 });
+	landEnemy->deathAnim.PushBack({ 196, 346, 50, 50 });
+	landEnemy->deathAnim.PushBack({ 247, 345, 50, 50 });
+	landEnemy->deathAnim.loop = false;
+	landEnemy->deathAnim.mustFlip = true;
+	landEnemy->deathAnim.speed = 1.0f;
+	//texture and render
+	landEnemyTexture = app->tex->Load("Assets/textures/Tileset.png");
+	landEnemy->show = false;
 
     return true;
 }
@@ -70,26 +96,50 @@ bool Enemy::PreUpdate()
 
 bool Enemy::Update(float dt)
 {
-    //---------------------------------------
-    switch (eState)
+    //Enemy Animation states
+    switch (eflyingState)
     {
     case IDLE:
-        currentAnim = &flyingEnemy->idleAnim;
+        currentFlyingAnim = &flyingEnemy->idleAnim;
         break;
+	case WALKING:
+		break;
     case DEATH:
-        currentAnim = &flyingEnemy->deathAnim;
+		currentFlyingAnim = &flyingEnemy->deathAnim;
         break;
     }
 
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { show = true; }
+	switch (elandState)
+	{
+	case IDLE:
+		currentLandAnim = &landEnemy->idleAnim;
+		break;
+	case WALKING:
+		currentLandAnim = &landEnemy->walkingAnim;
+		break;
+	case DEATH:
+		currentLandAnim = &landEnemy->deathAnim;
+		break;
+	}
 
-    if (show == true)
+	//Enemy Render
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { 
+		flyingEnemy->show = true;
+		landEnemy->show = true;
+	}
+    if (flyingEnemy->show == true)
     {
-        app->render->DrawTexture(enemyTexture, METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().x - 23), 
-            METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentAnim->GetCurrentFrame()), 1);
+        app->render->DrawTexture(flyingEnemyTexture, METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().x - 20), 
+            METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentFlyingAnim->GetCurrentFrame()), 1);
     }
+	if (landEnemy->show == true)
+	{
+		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 20),
+			METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentLandAnim->GetCurrentFrame()), 1);
+	}
 
     bool ret = true;
+
     //Enemy movement
     maxSpeedX = 1;
     minSpeedX = -1;
@@ -115,5 +165,12 @@ bool Enemy::CleanUp()
 
 void Enemy::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-
+	if (bodyA->type == PhysBody::Type::ENEMY_F && bodyB->type == PhysBody::Type::PLAYER) { 
+		flyingEnemy->show = false;
+		landEnemy->show = false;
+	}
+	if (bodyA->type == PhysBody::Type::ENEMY_L && bodyB->type == PhysBody::Type::PLAYER) { 
+		flyingEnemy->show = false;
+		landEnemy->show = false;
+	}
 }

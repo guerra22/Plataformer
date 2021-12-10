@@ -16,6 +16,15 @@ struct FlyingEnemy {
 	PhysBody* enemy;
 	Animation idleAnim;
 	Animation deathAnim;
+	bool show;
+};
+
+struct LandEnemy {
+	PhysBody* enemy;
+	Animation idleAnim;
+	Animation walkingAnim;
+	Animation deathAnim;
+	bool show;
 };
 
 class Enemy : public Module
@@ -47,24 +56,25 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-	SDL_Texture* enemyTexture;
+	SDL_Texture* flyingEnemyTexture;
+	SDL_Texture* landEnemyTexture;
 
 public:
 	FlyingEnemy* flyingEnemy;
-	Animation* currentAnim = nullptr;
-	Animation idleAnim, deathAnim;
+	LandEnemy* landEnemy;
+	Animation* currentFlyingAnim = nullptr;
+	Animation* currentLandAnim = nullptr;
 	enum State
 	{
 		IDLE,
+		WALKING,
 		DEATH
 	};
-	State eState;
+	State eflyingState;
+	State elandState;
 
 	float maxSpeedX;
 	float minSpeedX;
-
-	bool show;
-
 };
 
 #endif

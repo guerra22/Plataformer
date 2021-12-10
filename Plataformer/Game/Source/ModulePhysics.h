@@ -42,13 +42,10 @@ public:
 	enum class Type {
 		FLOOR,
 		PLAYER,
-		ENEMY,
-<<<<<<< Updated upstream
-		PLATFORM
-=======
+		ENEMY_F,
+		ENEMY_L,
 		PLATFORM,
 		WIN
->>>>>>> Stashed changes
 	};
 
 	Type type;

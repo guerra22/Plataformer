@@ -174,10 +174,10 @@ bool Enemy::Update(float dt)
 	}
 	if (flyingEnemy->enemy->body->GetPosition().x != app->player->p->player->body->GetPosition().x) {
 		if (flyingEnemy->enemy->body->GetPosition().x > app->player->p->player->body->GetPosition().x) {
-			flyingEnemy->enemy->body->SetLinearVelocity({ -0.5f , flyingEnemy->enemy->body->GetLinearVelocity().y });
+			flyingEnemy->enemy->body->SetLinearVelocity({ -0.6f , flyingEnemy->enemy->body->GetLinearVelocity().y });
 		}
 		if (flyingEnemy->enemy->body->GetPosition().x < app->player->p->player->body->GetPosition().x) {
-			flyingEnemy->enemy->body->SetLinearVelocity({ 0.5 , flyingEnemy->enemy->body->GetLinearVelocity().y });
+			flyingEnemy->enemy->body->SetLinearVelocity({ 0.6 , flyingEnemy->enemy->body->GetLinearVelocity().y });
 		}
 	}
 

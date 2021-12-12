@@ -189,8 +189,10 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-<<<<<<< Updated upstream
-
+	if (bodyA == p->player && app->godeMode == false && (bodyB->type == PhysBody::Type::ENEMY_F || bodyB->type == PhysBody::Type::ENEMY_L))
+	{
+		app->gameState = 2;
+	}
 }
 
 void Player::SavePlayer(pugi::xml_node& save)
@@ -200,10 +202,4 @@ void Player::SavePlayer(pugi::xml_node& save)
    // save.attribute("score") = playerscore;
    // save.attribute("health") = playerhealth;
    // save.attribute("state") = playerState;
-=======
-	if (bodyA == p->player && app->godeMode == false && (bodyB->type == PhysBody::Type::ENEMY_F || bodyB->type == PhysBody::Type::ENEMY_L)) 
-	{ 
-		app->gameState = 2;
-	}
->>>>>>> Stashed changes
 }

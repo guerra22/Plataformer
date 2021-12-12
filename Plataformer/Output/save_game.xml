@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <game_state>
 	<level value="true" />
-	<player x="496" y="281" score="400" health="4" state="3" />
+	<player x="358" y="281" score="400" health="4" state="3" />
 	<camera x="933" y="0" />
 </game_state>

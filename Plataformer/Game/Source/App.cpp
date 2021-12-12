@@ -361,7 +361,7 @@ bool App::LoadGame()
 
 			app->enemy->LoadState(save_node.child("entities"));
 
-			//----
+			//---------------
 		}
 	
 

@@ -102,6 +102,7 @@ bool Enemy::Start()
 	//texture and render
 	landEnemyTexture = app->tex->Load("Assets/textures/Tileset.png");
 	landEnemy->isDead = false;
+	landEnemy->direction = 0;
 
 	
 
@@ -155,6 +156,7 @@ bool Enemy::Update(float dt)
 		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 11),
 			METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
 	}
+
 	// Restart enemies position
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
 		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(230) }, 0.0f); 
@@ -181,6 +183,14 @@ bool Enemy::Update(float dt)
 		}
 	}
 
+	if (landEnemy->direction == 0){
+		landEnemy->enemy->body->SetLinearVelocity({ -0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
+		if (landEnemy->enemy->body->GetPosition().x < PIXEL_TO_METERS(690)) { landEnemy->direction = 1; }
+	}
+	else {
+		landEnemy->enemy->body->SetLinearVelocity({ 0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
+		if (landEnemy->enemy->body->GetPosition().x > PIXEL_TO_METERS(760)) { landEnemy->direction = 0; }
+	}
 
     return true;
 }
@@ -198,7 +208,6 @@ bool Enemy::CleanUp()
 
     return true;
 }
-
 
 void Enemy::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {

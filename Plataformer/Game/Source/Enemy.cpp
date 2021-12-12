@@ -67,18 +67,33 @@ bool Enemy::Start()
 	landEnemy->enemy->listener = this;
 	landEnemy->enemy->type = PhysBody::Type::ENEMY_L;
 	//Idle anim
-	landEnemy->idleAnim.PushBack({ 4, 347, 50, 50 });
-	landEnemy->idleAnim.PushBack({ 52, 346, 50, 50 });
-	landEnemy->idleAnim.PushBack({ 103, 345, 50, 50 });
+	landEnemy->idleAnim.PushBack({ 10, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 44, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 78, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 112, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 146, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 180, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 214, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 248, 241, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 281, 240, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 315, 242, 20, 20 });
+	landEnemy->idleAnim.PushBack({ 350, 243, 20, 20 });
 	landEnemy->idleAnim.loop = false;
 	landEnemy->idleAnim.mustFlip = true;
 	landEnemy->idleAnim.speed = 0.01f;
 	//Walking anim
-	//---
+	landEnemy->walkingAnim.PushBack({ 9, 269, 20, 20 });
+	landEnemy->walkingAnim.PushBack({ 43, 269, 20, 20 });
+	landEnemy->walkingAnim.PushBack({ 78, 270, 20, 20 });
+	landEnemy->walkingAnim.PushBack({ 112, 269, 20, 20 });
+	landEnemy->walkingAnim.PushBack({ 146, 269, 20, 20 });
+	landEnemy->walkingAnim.PushBack({ 180, 270, 20, 20 });
+	landEnemy->idleAnim.loop = true;
+	landEnemy->idleAnim.mustFlip = true;
+	landEnemy->idleAnim.speed = 0.1f;
 	//Death anim
-	landEnemy->deathAnim.PushBack({ 148, 347, 50, 50 });
-	landEnemy->deathAnim.PushBack({ 196, 346, 50, 50 });
-	landEnemy->deathAnim.PushBack({ 247, 345, 50, 50 });
+	landEnemy->deathAnim.PushBack({ 44, 295, 20, 20 });
+	landEnemy->deathAnim.PushBack({ 11, 294, 20, 20 });
 	landEnemy->deathAnim.loop = false;
 	landEnemy->deathAnim.mustFlip = true;
 	landEnemy->deathAnim.speed = 1.0f;

@@ -116,6 +116,8 @@ bool Enemy::Update(float dt)
     {
     case IDLE:
         currentFlyingAnim = &flyingEnemy->idleAnim;
+		flyingEnemy->idleAnim.Update();
+		flyingEnemy->idleAnim.Update();
         break;
 	case WALKING:
 		break;
@@ -128,9 +130,11 @@ bool Enemy::Update(float dt)
 	{
 	case IDLE:
 		currentLandAnim = &landEnemy->idleAnim;
+		landEnemy->idleAnim.Update();
 		break;
 	case WALKING:
 		currentLandAnim = &landEnemy->walkingAnim;
+		landEnemy->walkingAnim.Update();
 		break;
 	case DEATH:
 		currentLandAnim = &landEnemy->deathAnim;
@@ -154,6 +158,8 @@ bool Enemy::Update(float dt)
     //Enemy movement
     maxSpeedX = 1;
     minSpeedX = -1;
+
+
 
 
     return true;

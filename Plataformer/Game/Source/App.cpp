@@ -354,22 +354,14 @@ bool App::LoadGame()
 			pugi::xml_node save_node = saveFile.child("game_state");
 
 			pugi::xml_node level = save_node.child("level");
-			//scene = (GameScene::GameLevel)level.attribute("value").as_int();
 
 			pugi::xml_node player = save_node.child("player");
-			//playerPosition.x = player.attribute("x").as_int();
-		    //playerPosition.y = player.attribute("y").as_int();
-			//playerState = player.attribute("state").as_int();
-
-			pugi::xml_node camera = save_node.child("camera");
-			//cameraPosition.x = camera.attribute("x").as_int();
-			//cameraPosition.y = camera.attribute("y").as_int();
-
-			//fromGameSaved = true;
+			playerX = player.attribute("x").as_int();
+		    playerY = player.attribute("y").as_int();
 
 			app->enemy->LoadState(save_node.child("entities"));
 
-			//app->fade->FadeToBlack(this, this);
+			//----
 		}
 	
 
@@ -418,7 +410,6 @@ bool App::SaveGame() const
 			save_node = saveFile.child("game_state");
 			level = save_node.child("level");
 			player = save_node.child("player");
-			camera = save_node.child("camera");
 			entities = save_node.child("entities");
 		}
 
@@ -427,11 +418,7 @@ bool App::SaveGame() const
 		app->enemy->SaveEnemy(entities);
 		app->player->SavePlayer(player);
 
-		camera.attribute("x") = app->render->camera.x;
-		camera.attribute("y") = app->render->camera.y;
-
 		saveFile.save_file("save_game.xml");
-	
 
 	saveGameRequested = false;
 

@@ -30,6 +30,9 @@ public:
 	int gameState;
 	// False-OFF True-ON
 	bool godeMode;
+	// Saved player position
+	int playerX;
+	int playerY;
 
 	// Constructor
 	App(int argc, char* args[]);

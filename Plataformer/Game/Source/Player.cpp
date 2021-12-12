@@ -172,6 +172,11 @@ bool Player::Update(float dt)
 		}
 	}
 
+	//Load State
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+		p->player->body->SetTransform( { PIXEL_TO_METERS(app->playerX), PIXEL_TO_METERS(app->playerY) }, 0.0f);
+	}
+
 	return true;
 }
 
@@ -199,9 +204,7 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void Player::SavePlayer(pugi::xml_node& save)
 {
-   // save.attribute("x") = position.x;
-   // save.attribute("y") = position.y;
-   // save.attribute("score") = playerscore;
-   // save.attribute("health") = playerhealth;
-   // save.attribute("state") = playerState;
+   save.attribute("x") = p->player->body->GetPosition().x;
+   save.attribute("y") = p->player->body->GetPosition().y;
 }
+

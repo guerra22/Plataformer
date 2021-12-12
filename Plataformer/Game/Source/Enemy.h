@@ -74,9 +74,6 @@ public:
 	};
 	State eflyingState;
 	State elandState;
-
-	float maxSpeedX;
-	float minSpeedX;
 };
 
 #endif

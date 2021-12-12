@@ -111,7 +111,7 @@ bool Player::Update(float dt)
     }
 
 	//Player Render
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f); }
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f); }
     if (app->gameState == 1)
     {
         app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
@@ -189,6 +189,7 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+<<<<<<< Updated upstream
 
 }
 
@@ -199,4 +200,10 @@ void Player::SavePlayer(pugi::xml_node& save)
    // save.attribute("score") = playerscore;
    // save.attribute("health") = playerhealth;
    // save.attribute("state") = playerState;
+=======
+	if (bodyA == p->player && app->godeMode == false && (bodyB->type == PhysBody::Type::ENEMY_F || bodyB->type == PhysBody::Type::ENEMY_L)) 
+	{ 
+		app->gameState = 2;
+	}
+>>>>>>> Stashed changes
 }

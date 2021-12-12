@@ -36,7 +36,7 @@ bool Enemy::Start()
     //Initializing flying enemy struct data
     flyingEnemy = new FlyingEnemy;
     eflyingState = IDLE;
-    flyingEnemy->enemy = app->physics->CreateCircle(100, 300, 7, b2_kinematicBody);
+    flyingEnemy->enemy = app->physics->CreateCircle(30, 230, 7, b2_kinematicBody);
     flyingEnemy->enemy->body->SetFixedRotation(true);
 	flyingEnemy->enemy->listener = this;
     flyingEnemy->enemy->type = PhysBody::Type::ENEMY_F;
@@ -64,7 +64,7 @@ bool Enemy::Start()
 	//Initializing land enemy struct data
 	landEnemy = new LandEnemy;
 	elandState = IDLE;
-	landEnemy->enemy = app->physics->CreateCircle(200, 300, 7, b2_dynamicBody);
+	landEnemy->enemy = app->physics->CreateCircle(730, 200, 7, b2_dynamicBody);
 	landEnemy->enemy->body->SetFixedRotation(true);
 	landEnemy->enemy->listener = this;
 	landEnemy->enemy->type = PhysBody::Type::ENEMY_L;
@@ -102,6 +102,8 @@ bool Enemy::Start()
 	//texture and render
 	landEnemyTexture = app->tex->Load("Assets/textures/Tileset.png");
 	landEnemy->isDead = false;
+
+	
 
     return true;
 }
@@ -153,14 +155,31 @@ bool Enemy::Update(float dt)
 		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 11),
 			METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
 	}
+	// Restart enemies position
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
+		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(230) }, 0.0f); 
+		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(730), PIXEL_TO_METERS(217) }, 0.0f);
+	}
 
     bool ret = true;
 
     //Enemy movement
-    maxSpeedX = 1;
-    minSpeedX = -1;
-
-
+	if (flyingEnemy->enemy->body->GetPosition().y != app->player->p->player->body->GetPosition().y)	{
+		if (flyingEnemy->enemy->body->GetPosition().y > app->player->p->player->body->GetPosition().y){
+			flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , -0.5f });
+		}
+		if (flyingEnemy->enemy->body->GetPosition().y < app->player->p->player->body->GetPosition().y) {
+			flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , 0.5f });
+		}
+	}
+	if (flyingEnemy->enemy->body->GetPosition().x != app->player->p->player->body->GetPosition().x) {
+		if (flyingEnemy->enemy->body->GetPosition().x > app->player->p->player->body->GetPosition().x) {
+			flyingEnemy->enemy->body->SetLinearVelocity({ -0.5f , flyingEnemy->enemy->body->GetLinearVelocity().y });
+		}
+		if (flyingEnemy->enemy->body->GetPosition().x < app->player->p->player->body->GetPosition().x) {
+			flyingEnemy->enemy->body->SetLinearVelocity({ 0.5 , flyingEnemy->enemy->body->GetLinearVelocity().y });
+		}
+	}
 
 
     return true;

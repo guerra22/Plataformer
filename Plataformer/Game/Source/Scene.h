@@ -68,9 +68,6 @@ private:
 
 	b2World* world;
 	b2Body* ground;
-
-	
-
 };
 
 #endif // __SCENE_H__

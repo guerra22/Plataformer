@@ -74,10 +74,11 @@ bool Scene::Start()
 	Platform* plat14 = new Platform;
 	Platform* plat15 = new Platform;
 	Platform* plat16 = new Platform;
+	Platform* plat17 = new Platform;
 
 	plat1->platform = app->physics->CreateRectangle(85,368, 150, 30, b2_staticBody);
 	plat1->platform->type = PhysBody::Type::PLATFORM;
-	plat2->platform = app->physics->CreateRectangle(272, 337, 95, 30, b2_staticBody);
+	plat2->platform = app->physics->CreateRectangle(255, 337, 127, 30, b2_staticBody);
 	plat2->platform->type = PhysBody::Type::PLATFORM;
 	plat3->platform = app->physics->CreateRectangle(368, 304, 30, 30, b2_staticBody);
 	plat3->platform->type = PhysBody::Type::PLATFORM;
@@ -100,6 +101,9 @@ bool Scene::Start()
 	plat11->platform->type = PhysBody::Type::PLATFORM;
 	plat12->platform = app->physics->CreateRectangle(1188, 337, 135, 30, b2_staticBody);
 	plat12->platform->type = PhysBody::Type::PLATFORM;
+
+	plat13->platform = app->physics->CreateRectangle(816, 240, 32, 30, b2_staticBody);
+	plat13->platform->type = PhysBody::Type::PLATFORM;
 	
 	//death floor created
 	deathFloor = new PhysBody;

@@ -389,8 +389,8 @@
    <tile gid="98"/>
    <tile gid="99"/>
    <tile gid="41"/>
-   <tile gid="41"/>
-   <tile gid="44"/>
+   <tile gid="97"/>
+   <tile gid="91"/>
    <tile gid="41"/>
    <tile gid="41"/>
    <tile gid="41"/>
@@ -520,8 +520,8 @@
    <tile gid="41"/>
    <tile gid="41"/>
    <tile gid="41"/>
-   <tile gid="41"/>
    <tile gid="97"/>
+   <tile gid="98"/>
    <tile gid="98"/>
    <tile gid="99"/>
    <tile gid="41"/>

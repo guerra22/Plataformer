@@ -44,6 +44,8 @@ bool Enemy::Start()
 	flyingEnemy->idleAnim.PushBack({ 103, 345, 40, 55 });
 	flyingEnemy->idleAnim.PushBack({ 52, 346, 40, 55 });
     flyingEnemy->idleAnim.PushBack({ 4, 347, 40, 55 });
+	flyingEnemy->idleAnim.PushBack({ 52, 346, 40, 55 });
+	flyingEnemy->idleAnim.PushBack({ 103, 345, 40, 55 });
     flyingEnemy->idleAnim.loop = true;
     flyingEnemy->idleAnim.mustFlip = true;
     flyingEnemy->idleAnim.speed = 0.02f;

@@ -24,6 +24,7 @@ struct LandEnemy {
 	Animation idleAnim;
 	Animation walkingAnim;
 	Animation deathAnim;
+	int direction;
 	bool isDead;
 };
 

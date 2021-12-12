@@ -173,7 +173,7 @@ bool Player::Update(float dt)
 	}
 
 	//Load State
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 		p->player->body->SetTransform( { PIXEL_TO_METERS(app->playerX), PIXEL_TO_METERS(app->playerY) }, 0.0f);
 	}
 

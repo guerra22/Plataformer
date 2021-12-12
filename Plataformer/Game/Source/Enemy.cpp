@@ -41,16 +41,16 @@ bool Enemy::Start()
 	flyingEnemy->enemy->listener = this;
     flyingEnemy->enemy->type = PhysBody::Type::ENEMY_F;
     //Idle anim
-    flyingEnemy->idleAnim.PushBack({ 4, 347, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 52, 346, 50, 50 });
-    flyingEnemy->idleAnim.PushBack({ 103, 345, 50, 50 });
-    flyingEnemy->idleAnim.loop = false;
+	flyingEnemy->idleAnim.PushBack({ 103, 345, 40, 55 });
+	flyingEnemy->idleAnim.PushBack({ 52, 346, 40, 55 });
+    flyingEnemy->idleAnim.PushBack({ 4, 347, 40, 55 });
+    flyingEnemy->idleAnim.loop = true;
     flyingEnemy->idleAnim.mustFlip = true;
-    flyingEnemy->idleAnim.speed = 0.01f;
+    flyingEnemy->idleAnim.speed = 0.02f;
     //Death anim
-    flyingEnemy->deathAnim.PushBack({ 148, 347, 50, 50 });
-    flyingEnemy->deathAnim.PushBack({ 196, 346, 50, 50 });
-    flyingEnemy->deathAnim.PushBack({ 247, 345, 50, 50 });
+    flyingEnemy->deathAnim.PushBack({ 148, 347, 40, 55 });
+    flyingEnemy->deathAnim.PushBack({ 196, 346, 40, 55 });
+    flyingEnemy->deathAnim.PushBack({ 247, 345, 40, 55 });
     flyingEnemy->deathAnim.loop = false;
     flyingEnemy->deathAnim.mustFlip = true;
     flyingEnemy->deathAnim.speed = 1.0f;

@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Enemy.h"
 #include "Player.h"
 #include "Defs.h"
 #include "Log.h"
@@ -170,6 +171,7 @@ bool Player::Update(float dt)
 			p->walkingPlayerAnim.Reset();
 		}
 	}
+
 	return true;
 }
 

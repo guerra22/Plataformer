@@ -84,6 +84,10 @@ bool Player::Start()
 
     playerTexture = app->tex->Load("Assets/textures/Tileset.png");
 
+	app->audio->LoadFx("Assets/audio/fx/jumpSound.wav");
+	app->audio->LoadFx("Assets/audio/fx/winSound.wav");
+	app->audio->LoadFx("Assets/audio/fx/gameOverSound.wav");
+
 	return true;
 }
 
@@ -164,6 +168,7 @@ bool Player::Update(float dt)
 		//Jump
 		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
 		{
+			app->audio->PlayFx(1, 0);
 			p->player->body->ApplyLinearImpulse({ 0.0f, -0.25f }, { 0, 0 }, true);
 			pState = JUMP;
 			p->jumpingPlayerAnim.Update();
@@ -196,9 +201,15 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA == p->player && app->godeMode == false && (bodyB->type == PhysBody::Type::ENEMY_F || bodyB->type == PhysBody::Type::ENEMY_L))
+	if (bodyA == p->player && app->godeMode == false && (bodyB->type == PhysBody::Type::ENEMY_F || bodyB->type == PhysBody::Type::ENEMY_L || 
+		bodyB->type == PhysBody::Type::FLOOR) && app->gameState == 1)
 	{
+		app->audio->PlayFx(3, 0);
 		app->gameState = 2;
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::WIN) { 
+		app->gameState = 3;
+		app->audio->PlayFx(2, 0); 
 	}
 }
 

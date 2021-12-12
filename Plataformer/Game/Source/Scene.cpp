@@ -207,12 +207,5 @@ bool Scene::CleanUp()
 
 void Scene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::FLOOR && bodyB->type == PhysBody::Type::PLAYER && app->godeMode == false && app->gameState == 1) {
-		app->gameState = 2;
-		gameScreen = GameScreen::DEFEAT;
-	}
-	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && app->gameState == 1) {
-		app->gameState = 3;
-		gameScreen = GameScreen::VICTORY;
-	}
+	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && app->gameState == 1) { gameScreen = GameScreen::VICTORY; }
 }

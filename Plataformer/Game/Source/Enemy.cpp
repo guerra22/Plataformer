@@ -181,6 +181,12 @@ bool Enemy::Update(float dt)
 		}
 	}
 
+	//Load State
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+	    flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->FlyEnemyX), PIXEL_TO_METERS(app->FlyEnemyy) }, 0.0f);
+		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->LandEnemyx), PIXEL_TO_METERS(app->LandEnemyy) }, 0.0f);
+	}
+
 
     return true;
 }
@@ -207,9 +213,11 @@ void Enemy::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void Enemy::SaveEnemy(pugi::xml_node& save)
 {
-  // save.attribute("x") = position.x;
-  // save.attribute("y") = position.y;
-  // save.attribute("score") = playerscore;
-  // save.attribute("health") = playerhealth;
-  // save.attribute("state") = playerState;
+	save.attribute("xf") = METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().x);
+	save.attribute("yf") = METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y);
+
+	save.attribute("xl") = METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x);
+	save.attribute("yl") = METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y);
+
+
 }

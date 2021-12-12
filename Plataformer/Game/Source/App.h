@@ -33,6 +33,12 @@ public:
 	// Saved player position
 	int playerX;
 	int playerY;
+	//fly enemy
+	int FlyEnemyX;
+	int FlyEnemyy;
+	//Land Enemy
+	int LandEnemyx;
+	int LandEnemyy;
 
 	// Constructor
 	App(int argc, char* args[]);

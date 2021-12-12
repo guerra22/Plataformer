@@ -359,6 +359,12 @@ bool App::LoadGame()
 			playerX = player.attribute("x").as_int();
 		    playerY = player.attribute("y").as_int();
 
+			pugi::xml_node entities = save_node.child("entities");
+			FlyEnemyX = entities.attribute("xf").as_int();
+			FlyEnemyy = entities.attribute("yf").as_int();
+			LandEnemyx = entities.attribute("xl").as_int();
+			LandEnemyy = entities.attribute("yl").as_int();
+
 			app->enemy->LoadState(save_node.child("entities"));
 
 			//----

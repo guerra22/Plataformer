@@ -62,6 +62,7 @@ public:
 	SDL_Texture* landEnemyTexture;
 
 public:
+
 	FlyingEnemy* flyingEnemy;
 	LandEnemy* landEnemy;
 	Animation* currentFlyingAnim = nullptr;

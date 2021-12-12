@@ -185,7 +185,7 @@ bool Enemy::Update(float dt)
 
 
 	//Load State
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 	    flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->FlyEnemyX), PIXEL_TO_METERS(app->FlyEnemyy) }, 0.0f);
 		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->LandEnemyx), PIXEL_TO_METERS(app->LandEnemyy) }, 0.0f);
 	}

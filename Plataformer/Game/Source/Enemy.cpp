@@ -187,10 +187,10 @@ bool Enemy::Update(float dt)
 	//Load State
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
 	    flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->FlyEnemyX), PIXEL_TO_METERS(app->FlyEnemyy) }, 0.0f);
-		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->LandEnemyx), PIXEL_TO_METERS(app->LandEnemyy) }, 0.0f);
+		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->LandEnemyx), PIXEL_TO_METERS(app->LandEnemyy) }, 0.0f);
 	}
 
-
+	
 	if (landEnemy->direction == 0){
 		landEnemy->enemy->body->SetLinearVelocity({ -0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
 		if (landEnemy->enemy->body->GetPosition().x < PIXEL_TO_METERS(690)) { landEnemy->direction = 1; }
@@ -200,7 +200,7 @@ bool Enemy::Update(float dt)
 		if (landEnemy->enemy->body->GetPosition().x > PIXEL_TO_METERS(760)) { landEnemy->direction = 0; }
 	}
 
-
+	
     return true;
 }
 

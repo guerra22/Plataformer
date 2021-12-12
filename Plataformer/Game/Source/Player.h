@@ -48,6 +48,8 @@ public:
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+	void SavePlayer(pugi::xml_node& save);
+
 public:
 	SDL_Texture* playerTexture;
 

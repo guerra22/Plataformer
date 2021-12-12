@@ -345,7 +345,33 @@ bool App::LoadGame()
 {
 	bool ret = false;
 
-	//...
+
+		pugi::xml_document saveFile;
+		pugi::xml_parse_result result = saveFile.load_file("save_game.xml");
+
+		if (result != NULL)
+		{
+			pugi::xml_node save_node = saveFile.child("game_state");
+
+			pugi::xml_node level = save_node.child("level");
+			//scene = (GameScene::GameLevel)level.attribute("value").as_int();
+
+			pugi::xml_node player = save_node.child("player");
+			//playerPosition.x = player.attribute("x").as_int();
+		    //playerPosition.y = player.attribute("y").as_int();
+			//playerState = player.attribute("state").as_int();
+
+			pugi::xml_node camera = save_node.child("camera");
+			//cameraPosition.x = camera.attribute("x").as_int();
+			//cameraPosition.y = camera.attribute("y").as_int();
+
+			//fromGameSaved = true;
+
+			app->enemy->LoadState(save_node.child("entities"));
+
+			//app->fade->FadeToBlack(this, this);
+		}
+	
 
 	loadGameRequested = false;
 
@@ -357,7 +383,55 @@ bool App::SaveGame() const
 {
 	bool ret = true;
 
-	//...
+	
+		pugi::xml_document saveFile;
+		pugi::xml_parse_result result = saveFile.load_file("save_game.xml");
+
+		pugi::xml_node save_node;
+		pugi::xml_node level;
+		pugi::xml_node player;
+		pugi::xml_node camera;
+		pugi::xml_node entities;
+
+		if (result == NULL)
+		{
+			pugi::xml_node declaration = saveFile.append_child(pugi::node_declaration);
+			declaration.append_attribute("version") = "1.0";
+
+			save_node = saveFile.append_child("game_state");
+
+			level = save_node.append_child("level");
+			level.append_attribute("value");
+
+			player = save_node.append_child("player");
+			player.append_attribute("x");
+			player.append_attribute("y");
+			player.append_attribute("state");
+
+			camera = save_node.append_child("camera");
+			camera.append_attribute("x");
+			camera.append_attribute("y");
+
+			entities = save_node.append_child("entities");
+		}
+		else {
+			save_node = saveFile.child("game_state");
+			level = save_node.child("level");
+			player = save_node.child("player");
+			camera = save_node.child("camera");
+			entities = save_node.child("entities");
+		}
+
+		level.attribute("value") = scene;
+
+		app->enemy->SaveEnemy(entities);
+		app->player->SavePlayer(player);
+
+		camera.attribute("x") = app->render->camera.x;
+		camera.attribute("y") = app->render->camera.y;
+
+		saveFile.save_file("save_game.xml");
+	
 
 	saveGameRequested = false;
 

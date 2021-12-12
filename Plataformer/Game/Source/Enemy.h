@@ -55,6 +55,8 @@ public:
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+	void SaveEnemy(pugi::xml_node& save);
+
 public:
 	SDL_Texture* flyingEnemyTexture;
 	SDL_Texture* landEnemyTexture;

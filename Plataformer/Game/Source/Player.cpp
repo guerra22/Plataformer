@@ -191,3 +191,12 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 
 }
+
+void Player::SavePlayer(pugi::xml_node& save)
+{
+   // save.attribute("x") = position.x;
+   // save.attribute("y") = position.y;
+   // save.attribute("score") = playerscore;
+   // save.attribute("health") = playerhealth;
+   // save.attribute("state") = playerState;
+}

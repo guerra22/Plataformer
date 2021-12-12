@@ -204,7 +204,7 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void Player::SavePlayer(pugi::xml_node& save)
 {
-   save.attribute("x") = p->player->body->GetPosition().x;
-   save.attribute("y") = p->player->body->GetPosition().y;
+   save.attribute("x") = METERS_TO_PIXELS(p->player->body->GetPosition().x);
+   save.attribute("y") = METERS_TO_PIXELS(p->player->body->GetPosition().y);
 }
 

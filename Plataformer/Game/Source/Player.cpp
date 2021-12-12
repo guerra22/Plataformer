@@ -111,7 +111,7 @@ bool Player::Update(float dt)
     }
 
 	//Player Render
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { p->player->body->SetTransform({ PIXEL_TO_METERS(20), PIXEL_TO_METERS(300) }, 0.0f); }
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) { p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f); }
     if (app->gameState == 1)
     {
         app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,

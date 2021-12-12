@@ -119,7 +119,6 @@ bool Enemy::Update(float dt)
     case IDLE:
         currentFlyingAnim = &flyingEnemy->idleAnim;
 		flyingEnemy->idleAnim.Update();
-		flyingEnemy->idleAnim.Update();
         break;
 	case WALKING:
 		break;
@@ -152,7 +151,7 @@ bool Enemy::Update(float dt)
 	if (app->gameState == 1 && landEnemy->isDead == false)
 	{
 		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 11),
-			METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
+			METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
 	}
 
     bool ret = true;

@@ -109,7 +109,7 @@ bool Scene::Start()
 
 	//win block created
 	winBlock = new PhysBody;
-	winBlock = app->physics->CreateRectangle(600, 250, 30, 30, b2_staticBody);
+	winBlock = app->physics->CreateRectangle(1230, 310, 30, 30, b2_staticBody);
 	winBlock->listener = this;
 	winBlock->type = PhysBody::Type::WIN;
 

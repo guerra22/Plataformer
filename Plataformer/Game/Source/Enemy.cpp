@@ -62,7 +62,7 @@ bool Enemy::Start()
 	//Initializing land enemy struct data
 	landEnemy = new LandEnemy;
 	elandState = IDLE;
-	landEnemy->enemy = app->physics->CreateCircle(200, 300, 7, b2_kinematicBody);
+	landEnemy->enemy = app->physics->CreateCircle(200, 300, 7, b2_dynamicBody);
 	landEnemy->enemy->body->SetFixedRotation(true);
 	landEnemy->enemy->listener = this;
 	landEnemy->enemy->type = PhysBody::Type::ENEMY_L;
@@ -149,8 +149,8 @@ bool Enemy::Update(float dt)
     }
 	if (app->gameState == 1 && landEnemy->isDead == false)
 	{
-		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 20),
-			METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentLandAnim->GetCurrentFrame()), 1);
+		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 11),
+			METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
 	}
 
     bool ret = true;

@@ -1,4 +1,32 @@
-﻿  Scene.cpp
+﻿  App.cpp
 C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
 C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(182,28): warning C4244:  '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(207,14): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  Enemy.cpp
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(213,47): warning C4244:  'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
+  ModulePhysics.cpp
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(96,23): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(97,25): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(141,21): warning C4018:  '<': no coinciden signed/unsigned
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(191,44): warning C4305:  '=': truncamiento de 'double' a 'float32'
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(341,13): warning C4244:  'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(342,13): warning C4244:  'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  Player.cpp
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\ModulePhysics.cpp(348,27): warning C4244:  'return': conversión de 'float32' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
+  Scene.cpp
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
+  Generando código...
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
+  LINK : no se encontró C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   Game.vcxproj -> C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

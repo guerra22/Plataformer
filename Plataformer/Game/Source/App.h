@@ -40,10 +40,10 @@ public:
 	int playerY;
 	//fly enemy
 	int FlyEnemyX;
-	int FlyEnemyy;
+	int FlyEnemyY;
 	//Land Enemy
-	int LandEnemyx;
-	int LandEnemyy;
+	int LandEnemyX;
+	int LandEnemyY;
 
 	// Constructor
 	App(int argc, char* args[]);

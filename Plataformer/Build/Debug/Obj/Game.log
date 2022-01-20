@@ -1,6 +1,16 @@
-﻿  Player.cpp
+﻿  App.cpp
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(182,28): warning C4244:  '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(207,14): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  Player.cpp
+C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\App.cpp(213,47): warning C4244:  'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
 C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(55,19): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
 C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Animation.h(57,30): warning C4244:  '=': conversión de 'float' a 'int'; posible pérdida de datos
 C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Log.h(4,1): warning C4005:  'LOG': redefinición de macro
+  Generando código...
 C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Game\Source\Globals.h(5): message :  vea la definición anterior de 'LOG'
+  LINK : no se encontr¾ C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe o no lo gener¾ el ·ltimo vÝnculo incremental; ejecutando vÝnculo completo
   Game.vcxproj -> C:\Users\tolo otto\Documents\GitHub\Plataformer\Plataformer\Build\Debug\Game.exe

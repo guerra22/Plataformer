@@ -358,12 +358,13 @@ bool App::LoadGame()
 			pugi::xml_node player = save_node.child("player");
 			playerX = player.attribute("x").as_int();
 		    playerY = player.attribute("y").as_int();
+			playerHealth = player.attribute("health").as_int();
 
 			pugi::xml_node entities = save_node.child("entities");
 			FlyEnemyX = entities.attribute("xf").as_int();
-			FlyEnemyy = entities.attribute("yf").as_int();
-			LandEnemyx = entities.attribute("xl").as_int();
-			LandEnemyy = entities.attribute("yl").as_int();
+			FlyEnemyY = entities.attribute("yf").as_int();
+			LandEnemyX = entities.attribute("xl").as_int();
+			LandEnemyY = entities.attribute("yl").as_int();
 
 			app->enemy->LoadState(save_node.child("entities"));
 
@@ -404,6 +405,7 @@ bool App::SaveGame() const
 			player = save_node.append_child("player");
 			player.append_attribute("x");
 			player.append_attribute("y");
+			player.append_attribute("health");
 			player.append_attribute("state");
 
 			camera = save_node.append_child("camera");

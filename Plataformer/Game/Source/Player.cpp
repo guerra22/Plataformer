@@ -196,6 +196,11 @@ bool Player::Update(float dt)
 	//Load State
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 		p->player->body->SetTransform( { PIXEL_TO_METERS(app->playerX), PIXEL_TO_METERS(app->playerY) }, 0.0f);
+		if (app->playerHealth == 3 || app->playerHealth == 2 || app->playerHealth == 1) { 
+			Health = app->playerHealth; 
+		}else {
+			Health = 3;
+		}
 	}
 
 	return true;
@@ -251,5 +256,6 @@ void Player::SavePlayer(pugi::xml_node& save)
 {
    save.attribute("x") = METERS_TO_PIXELS(p->player->body->GetPosition().x);
    save.attribute("y") = METERS_TO_PIXELS(p->player->body->GetPosition().y);
+   save.attribute("health") = Health;
 }
 

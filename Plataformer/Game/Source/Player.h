@@ -53,6 +53,8 @@ public:
 public:
 	SDL_Texture* playerTexture;
 
+	int Health;
+
 public:
 	Player1* p;
 	Animation* currentAnim = nullptr;

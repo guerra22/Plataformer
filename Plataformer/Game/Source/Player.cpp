@@ -88,6 +88,11 @@ bool Player::Start()
 	app->audio->LoadFx("Assets/audio/fx/winSound.wav");
 	app->audio->LoadFx("Assets/audio/fx/gameOverSound.wav");
 
+	app->flyingCooldown = 0;
+	app->landCooldown = 0;
+
+	Health = 3;
+
 	return true;
 }
 
@@ -98,6 +103,13 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
+	if (Health <= 0) { 
+		app->gameState = 2;
+		if(app->gameState == 1) { app->audio->PlayFx(3, 0); }
+	}
+
+	if (app->flyingCooldown > 0) { --app->flyingCooldown; }
+	if (app->landCooldown > 0) { --app->landCooldown; }
 	//---------------------------------------
     switch (pState)
     {
@@ -116,7 +128,11 @@ bool Player::Update(float dt)
     }
 
 	//Player Render
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f); }
+    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
+		Health = 3;
+		p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f);
+	}
+
     if (app->gameState == 1)
     {
         app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
@@ -201,11 +217,29 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA == p->player && app->godeMode == false && (bodyB->type == PhysBody::Type::ENEMY_F || bodyB->type == PhysBody::Type::ENEMY_L || 
-		bodyB->type == PhysBody::Type::FLOOR) && app->gameState == 1)
-	{
-		app->audio->PlayFx(3, 0);
+	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_F && app->gameState == 1 && app->flyingCooldown < 1 ){
+		if (Health == 1) {
+			app->gameState = 2;
+			app->audio->PlayFx(3, 0);
+		}
+		else {
+			Health -= 1;
+		}
+		app->flyingCooldown = 120;
+	}
+	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_L && app->gameState == 1 && app->landCooldown < 1) {
+		if (Health == 1) {
+			app->gameState = 2;
+			app->audio->PlayFx(3, 0);
+		}
+		else {
+			Health -= 1;
+		}
+		app->landCooldown = 120;
+	}
+	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::FLOOR && app->gameState == 1) {
 		app->gameState = 2;
+		app->audio->PlayFx(3, 0);
 	}
 	if (bodyA == p->player && bodyB->type == PhysBody::Type::WIN) { 
 		app->gameState = 3;

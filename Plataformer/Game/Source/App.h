@@ -30,6 +30,11 @@ public:
 	int gameState;
 	// False-OFF True-ON
 	bool godeMode;
+	//hit cooldowns
+	int flyingCooldown;
+	int landCooldown;
+	//player health
+	int playerHealth;
 	// Saved player position
 	int playerX;
 	int playerY;

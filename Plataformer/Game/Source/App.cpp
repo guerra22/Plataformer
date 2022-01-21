@@ -408,11 +408,11 @@ bool App::SaveGame() const
 			player.append_attribute("health");
 			player.append_attribute("state");
 
-			camera = save_node.append_child("camera");
-			camera.append_attribute("x");
-			camera.append_attribute("y");
-
 			entities = save_node.append_child("entities");
+			entities.append_attribute("xf");
+			entities.append_attribute("yf");
+			entities.append_attribute("xl");
+			entities.append_attribute("yl");
 		}
 		else {
 			save_node = saveFile.child("game_state");

@@ -1,0 +1,44 @@
+#ifndef __ENTITY_H__
+#define __ENTITY_H__
+
+#include "Module.h"
+#include "ModulePhysics.h"
+#include "Box2D/Box2D/Box2D.h"
+#include "Module.h"
+#include "Globals.h"
+#include "Point.h"
+#include "Animation.h"
+#include "Textures.h"
+#include "Render.h"
+
+
+class Entity : public Module
+{
+public:
+	Entity();
+
+	// Destructor
+	virtual ~Entity();
+
+	// Called before render is available
+	bool Awake();
+
+	// Called before the first frame
+	bool Start();
+
+	// Called before all Updates
+	bool PreUpdate();
+
+	// Called each loop iteration
+	bool Update(float dt);
+
+	// Called before all Updates
+	bool PostUpdate();
+
+	// Called before quitting
+	bool CleanUp();
+
+
+};
+
+#endif

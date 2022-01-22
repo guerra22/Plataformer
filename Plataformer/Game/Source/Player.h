@@ -10,7 +10,7 @@
 #include "Animation.h"
 #include "Textures.h"
 #include "Render.h"
-
+#include "Entities.h"
 
 struct Player1 {
 	PhysBody* player;
@@ -20,7 +20,7 @@ struct Player1 {
 	Animation deathPlayerAnim;
 };
 
-class Player : public Module
+class Player : public Entities
 {
 public:
 	Player();

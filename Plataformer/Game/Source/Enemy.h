@@ -10,7 +10,7 @@
 #include "Animation.h"
 #include "Textures.h"
 #include "Render.h"
-
+#include "Entities.h"
 
 struct FlyingEnemy {
 	PhysBody* enemy;
@@ -28,7 +28,7 @@ struct LandEnemy {
 	bool isDead;
 };
 
-class Enemy : public Module
+class Enemy : public Entities
 {
 public:
 	Enemy();

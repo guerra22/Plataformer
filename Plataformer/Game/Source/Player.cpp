@@ -14,7 +14,7 @@
 #include "External/Box2D/Box2D/Box2D.h"
 
 
-Player::Player() : Module()
+Player::Player() : Entities()
 {
 	name.Create("player");
 }

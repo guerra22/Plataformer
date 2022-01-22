@@ -14,9 +14,9 @@
 #include "External/Box2D/Box2D/Box2D.h"
 
 
-Enemy::Enemy() : Module()
+Enemy::Enemy() : Entities()
 {
-    name.Create("enemy");
+   name.Create("enemy");
 }
 
 // Destructor

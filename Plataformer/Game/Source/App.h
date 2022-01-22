@@ -20,6 +20,7 @@ class Audio;
 class Scene;
 class Map;
 class ModulePhysics;
+class Entities;
 class Enemy;
 class Player;
 
@@ -112,6 +113,7 @@ public:
 	Scene* scene;
 	Map* map;
 	ModulePhysics* physics;
+	Entities* entities;
 	Enemy* enemy;
 	Player* player;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <game_state>
 	<level value="true" />
-	<player x="275" y="314" health="3" state="" />
-	<entities xf="183" yf="314" xl="699" yl="217" />
+	<player x="102" y="345" health="3" state="" />
+	<entities xf="73" yf="274" xl="714" yl="217" />
 </game_state>

@@ -9,6 +9,7 @@
 #include "ModulePhysics.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Entities.h"
 #include "Player.h"
 #include "Enemy.h"
 
@@ -28,6 +29,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	physics = new ModulePhysics();
+	entities = new Entities();
 	enemy = new Enemy();
 	player = new Player();
 	// Ordered for awake / Start / Update
@@ -40,6 +42,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(scene);
+	AddModule(entities);
 	AddModule(enemy);
 	AddModule(player);
 	// Render last to swap buffer

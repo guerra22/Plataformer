@@ -9,9 +9,9 @@
 #include "ModulePhysics.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Entity.h"
 #include <iostream>
 #include <sstream>
 
@@ -28,9 +28,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	physics = new ModulePhysics();
+	entity = new Entity();
 	enemy = new Enemy();
 	player = new Player();
-	entity = new Entity();
+
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	
@@ -41,11 +42,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(scene);
+	AddModule(entity);
 	AddModule(enemy);
 	AddModule(player);
 	// Render last to swap buffer
 	AddModule(render);
-	AddModule(entity);
+
 
 	ptimer = new PerfTimer();
 	frameDuration = new PerfTimer();

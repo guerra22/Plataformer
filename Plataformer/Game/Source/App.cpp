@@ -11,7 +11,7 @@
 #include "Log.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Entity.h"
+
 #include <iostream>
 #include <sstream>
 
@@ -30,7 +30,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new ModulePhysics();
 	enemy = new Enemy();
 	player = new Player();
-	entity = new Entity();
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	
@@ -45,7 +44,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	// Render last to swap buffer
 	AddModule(render);
-	AddModule(entity);
+
 
 	ptimer = new PerfTimer();
 	frameDuration = new PerfTimer();

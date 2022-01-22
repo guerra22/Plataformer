@@ -22,7 +22,6 @@ class Map;
 class ModulePhysics;
 class Enemy;
 class Player;
-class Entity;
 
 class App
 {
@@ -115,7 +114,6 @@ public:
 	ModulePhysics* physics;
 	Enemy* enemy;
 	Player* player;
-	Entity* entity;
 
 private:
 

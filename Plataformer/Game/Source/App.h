@@ -20,10 +20,9 @@ class Audio;
 class Scene;
 class Map;
 class ModulePhysics;
-class Entity;
 class Enemy;
 class Player;
-
+class Entity;
 
 class App
 {
@@ -114,10 +113,9 @@ public:
 	Scene* scene;
 	Map* map;
 	ModulePhysics* physics;
-	Entity* entity;
 	Enemy* enemy;
 	Player* player;
-
+	Entity* entity;
 
 private:
 

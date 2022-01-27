@@ -43,7 +43,9 @@ public:
 		FLOOR,
 		PLAYER,
 		ENEMY_F,
+		ENEMY_FH,
 		ENEMY_L,
+		ENEMY_LH,
 		PLATFORM,
 		WIN
 	};

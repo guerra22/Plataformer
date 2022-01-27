@@ -37,9 +37,13 @@ bool Enemy::Start()
     flyingEnemy = new FlyingEnemy;
     eflyingState = IDLE;
     flyingEnemy->enemy = app->physics->CreateCircle(30, 230, 7, b2_kinematicBody);
+	flyingEnemy->hitbox = app->physics->CreateCircle(30, 225, 5, b2_kinematicBody);
     flyingEnemy->enemy->body->SetFixedRotation(true);
+	flyingEnemy->hitbox->body->SetFixedRotation(true);
 	flyingEnemy->enemy->listener = this;
+	flyingEnemy->hitbox->listener = this;
     flyingEnemy->enemy->type = PhysBody::Type::ENEMY_F;
+	flyingEnemy->hitbox->type = PhysBody::Type::ENEMY_FH;
     //Idle anim
 	flyingEnemy->idleAnim.PushBack({ 103, 345, 40, 55 });
 	flyingEnemy->idleAnim.PushBack({ 52, 346, 40, 55 });
@@ -65,9 +69,13 @@ bool Enemy::Start()
 	landEnemy = new LandEnemy;
 	elandState = IDLE;
 	landEnemy->enemy = app->physics->CreateCircle(730, 200, 7, b2_dynamicBody);
+	landEnemy->hitbox = app->physics->CreateCircle(730, 195, 5, b2_dynamicBody);
 	landEnemy->enemy->body->SetFixedRotation(true);
+	landEnemy->hitbox->body->SetFixedRotation(true);
 	landEnemy->enemy->listener = this;
+	landEnemy->hitbox->listener = this;
 	landEnemy->enemy->type = PhysBody::Type::ENEMY_L;
+	landEnemy->hitbox->type = PhysBody::Type::ENEMY_LH;
 	//Idle anim
 	landEnemy->idleAnim.PushBack({ 10, 242, 20, 20 });
 	landEnemy->idleAnim.PushBack({ 44, 242, 20, 20 });
@@ -159,45 +167,60 @@ bool Enemy::Update(float dt)
 
 	// Restart enemies position
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
-		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(230) }, 0.0f); 
+		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(230) }, 0.0f);
+		flyingEnemy->isDead = false;
 		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(730), PIXEL_TO_METERS(217) }, 0.0f);
+		landEnemy->isDead = false;
 	}
 
     bool ret = true;
 
     //Enemy movement
-	if (flyingEnemy->enemy->body->GetPosition().y != app->player->p->player->body->GetPosition().y)	{
-		if (flyingEnemy->enemy->body->GetPosition().y > app->player->p->player->body->GetPosition().y){
-			flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , -0.5f });
+	if (flyingEnemy->isDead == false) {
+		if (flyingEnemy->enemy->body->GetPosition().y != app->player->p->player->body->GetPosition().y) {
+			if (flyingEnemy->enemy->body->GetPosition().y > app->player->p->player->body->GetPosition().y) {
+				flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , -0.5f });
+			}
+			if (flyingEnemy->enemy->body->GetPosition().y < app->player->p->player->body->GetPosition().y) {
+				flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , 0.5f });
+			}
 		}
-		if (flyingEnemy->enemy->body->GetPosition().y < app->player->p->player->body->GetPosition().y) {
-			flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , 0.5f });
+		if (flyingEnemy->enemy->body->GetPosition().x != app->player->p->player->body->GetPosition().x) {
+			if (flyingEnemy->enemy->body->GetPosition().x > app->player->p->player->body->GetPosition().x) {
+				flyingEnemy->enemy->body->SetLinearVelocity({ -0.6f , flyingEnemy->enemy->body->GetLinearVelocity().y });
+			}
+			if (flyingEnemy->enemy->body->GetPosition().x < app->player->p->player->body->GetPosition().x) {
+				flyingEnemy->enemy->body->SetLinearVelocity({ 0.6 , flyingEnemy->enemy->body->GetLinearVelocity().y });
+			}
 		}
 	}
-	if (flyingEnemy->enemy->body->GetPosition().x != app->player->p->player->body->GetPosition().x) {
-		if (flyingEnemy->enemy->body->GetPosition().x > app->player->p->player->body->GetPosition().x) {
-			flyingEnemy->enemy->body->SetLinearVelocity({ -0.6f , flyingEnemy->enemy->body->GetLinearVelocity().y });
-		}
-		if (flyingEnemy->enemy->body->GetPosition().x < app->player->p->player->body->GetPosition().x) {
-			flyingEnemy->enemy->body->SetLinearVelocity({ 0.6 , flyingEnemy->enemy->body->GetLinearVelocity().y });
-		}
+	else {
+		flyingEnemy->enemy->body->SetTransform({ 0,0 }, 0.0f);
 	}
 
+	if (landEnemy->isDead == false) {
+		if (landEnemy->direction == 0) {
+			landEnemy->enemy->body->SetLinearVelocity({ -0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
+			if (landEnemy->enemy->body->GetPosition().x < PIXEL_TO_METERS(690)) { landEnemy->direction = 1; }
+		}
+		else {
+			landEnemy->enemy->body->SetLinearVelocity({ 0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
+			if (landEnemy->enemy->body->GetPosition().x > PIXEL_TO_METERS(760)) { landEnemy->direction = 0; }
+		}
+	}
+	else {
+		landEnemy->enemy->body->SetTransform({ 0,0 }, 0.0f);
+	}
+
+	flyingEnemy->hitbox->body->SetTransform({ flyingEnemy->enemy->body->GetPosition().x, flyingEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
+	landEnemy->hitbox->body->SetTransform({ landEnemy->enemy->body->GetPosition().x, landEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
 
 	//Load State
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 	    flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->FlyEnemyX), PIXEL_TO_METERS(app->FlyEnemyY) }, 0.0f);
+		flyingEnemy->isDead = app->isDeadFh;
 		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->LandEnemyX), PIXEL_TO_METERS(app->LandEnemyY) }, 0.0f);
-	}
-
-	
-	if (landEnemy->direction == 0){
-		landEnemy->enemy->body->SetLinearVelocity({ -0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
-		if (landEnemy->enemy->body->GetPosition().x < PIXEL_TO_METERS(690)) { landEnemy->direction = 1; }
-	}
-	else {
-		landEnemy->enemy->body->SetLinearVelocity({ 0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
-		if (landEnemy->enemy->body->GetPosition().x > PIXEL_TO_METERS(760)) { landEnemy->direction = 0; }
+		landEnemy->isDead = app->isDeadLh;
 	}
 
 	
@@ -231,5 +254,6 @@ void Enemy::SaveEnemy(pugi::xml_node& save)
 	save.attribute("xl") = METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x);
 	save.attribute("yl") = METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y);
 
-
+	save.attribute("isDeadFh") = flyingEnemy->isDead;
+	save.attribute("isDeadLh") = landEnemy->isDead;
 }

@@ -87,6 +87,8 @@ bool Player::Start()
 	app->audio->LoadFx("Assets/audio/fx/jumpSound.wav");
 	app->audio->LoadFx("Assets/audio/fx/winSound.wav");
 	app->audio->LoadFx("Assets/audio/fx/gameOverSound.wav");
+	app->audio->LoadFx("Assets/audio/fx/enemyDamage.wav");
+	app->audio->LoadFx("Assets/audio/fx/enemyKill.wav");
 
 	app->flyingCooldown = 0;
 	app->landCooldown = 0;
@@ -222,33 +224,45 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_F && app->gameState == 1 && app->flyingCooldown < 1 ){
+	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_F && app->gameState == 1 &&
+		app->flyingCooldown < 1 && app->enemy->flyingEnemy->isDead == false ){
 		if (Health == 1) {
 			app->gameState = 2;
 			app->audio->PlayFx(3, 0);
 		}
 		else {
+			app->audio->PlayFx(4, 0);
 			Health -= 1;
 		}
 		app->flyingCooldown = 120;
 	}
-	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_L && app->gameState == 1 && app->landCooldown < 1) {
+	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_L && app->gameState == 1 &&
+		app->landCooldown < 1 && app->enemy->flyingEnemy->isDead == false ) {
 		if (Health == 1) {
 			app->gameState = 2;
 			app->audio->PlayFx(3, 0);
 		}
 		else {
+			app->audio->PlayFx(4, 0);
 			Health -= 1;
 		}
 		app->landCooldown = 120;
 	}
 	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::FLOOR && app->gameState == 1) {
 		app->gameState = 2;
-		app->audio->PlayFx(3, 0);
+		app->audio->PlayFx(5, 0);
 	}
 	if (bodyA == p->player && bodyB->type == PhysBody::Type::WIN) { 
 		app->gameState = 3;
-		app->audio->PlayFx(2, 0); 
+		app->audio->PlayFx(2, 0);
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::ENEMY_FH) { 
+		app->audio->PlayFx(5, 0);
+		app->enemy->flyingEnemy->isDead = true;
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::ENEMY_LH) { 
+		app->audio->PlayFx(5, 0);
+		app->enemy->landEnemy->isDead = true; 
 	}
 }
 

@@ -14,6 +14,7 @@
 
 struct FlyingEnemy {
 	PhysBody* enemy;
+	PhysBody* hitbox;
 	Animation idleAnim;
 	Animation deathAnim;
 	bool isDead;
@@ -21,6 +22,7 @@ struct FlyingEnemy {
 
 struct LandEnemy {
 	PhysBody* enemy;
+	PhysBody* hitbox;
 	Animation idleAnim;
 	Animation walkingAnim;
 	Animation deathAnim;

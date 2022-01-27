@@ -366,8 +366,10 @@ bool App::LoadGame()
 			pugi::xml_node entities = save_node.child("entities");
 			FlyEnemyX = entities.attribute("xf").as_int();
 			FlyEnemyY = entities.attribute("yf").as_int();
+			isDeadFh = entities.attribute("isDeadFh").as_bool();
 			LandEnemyX = entities.attribute("xl").as_int();
 			LandEnemyY = entities.attribute("yl").as_int();
+			isDeadLh = entities.attribute("isDeadLh").as_bool();
 
 			app->enemy->LoadState(save_node.child("entities"));
 
@@ -414,8 +416,10 @@ bool App::SaveGame() const
 			entities = save_node.append_child("entities");
 			entities.append_attribute("xf");
 			entities.append_attribute("yf");
+			entities.append_attribute("isDeadFh");
 			entities.append_attribute("xl");
 			entities.append_attribute("yl");
+			entities.append_attribute("isDeadLh");
 		}
 		else {
 			save_node = saveFile.child("game_state");

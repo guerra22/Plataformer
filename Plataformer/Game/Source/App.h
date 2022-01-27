@@ -31,6 +31,9 @@ public:
 	int gameState;
 	// False-OFF True-ON
 	bool godeMode;
+	// Enemy states
+	bool isDeadFh;
+	bool isDeadLh;
 	//hit cooldowns
 	int flyingCooldown;
 	int landCooldown;

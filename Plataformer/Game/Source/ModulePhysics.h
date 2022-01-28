@@ -46,6 +46,8 @@ public:
 		ENEMY_FH,
 		ENEMY_L,
 		ENEMY_LH,
+		HEART,
+		CHECKPOINT,
 		PLATFORM,
 		WIN
 	};

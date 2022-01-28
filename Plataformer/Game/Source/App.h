@@ -48,6 +48,9 @@ public:
 	//Land Enemy
 	int LandEnemyX;
 	int LandEnemyY;
+	// heart states
+	bool heart1Awake;
+	bool heart2Awake;
 
 	// Constructor
 	App(int argc, char* args[]);

@@ -11,6 +11,11 @@
 #include "Textures.h"
 #include "Render.h"
 
+struct Heart {
+	PhysBody* heart;
+	Animation idleHeart;
+	bool isAwake;
+};
 
 class Entities : public Module
 {
@@ -37,6 +42,13 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+	Heart* heart1;
+	Heart* heart2;
+	Animation* idleHeart;
+	Animation* currentHeartAnim = nullptr;
+	SDL_Texture* heartTexture;
+
 
 
 };

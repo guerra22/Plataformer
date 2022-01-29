@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,7 +44,7 @@ bool Scene::Start()
 	WinScreen = app->tex->Load("Assets/textures/WinScreen.png");
 	
 	// Load music
-	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
+	if (music == true) { app->audio->PlayMusic("Assets/audio/music/music_spy.ogg"); }
 
 	LOG("Creating Physics 2D environment");
 	int points[8] = {
@@ -154,7 +155,7 @@ bool Scene::Update(float dt)
 		if (app->gameState == 2) { gameScreen = GameScreen::DEFEAT; }
 		if (app->gameState == 3) { gameScreen = GameScreen::VICTORY; }
 
-		// L02: DONE 3: Request Load / Save when pressing L/S
+		//Request Load / Save when pressing L/S
 		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 			app->LoadGameRequest();
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
@@ -162,7 +163,6 @@ bool Scene::Update(float dt)
 
 		// Draw map
 		app->map->Draw();
-
 		app->win->SetTitle(title.GetString());
 		break;
 	case Scene::DEFEAT:
@@ -207,5 +207,5 @@ bool Scene::CleanUp()
 
 void Scene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && app->gameState == 1) { gameScreen = GameScreen::VICTORY; }
+	if (bodyA->type == PhysBody::Type::WIN && bodyB->type == PhysBody::Type::PLAYER && app->gameState == 1 && app->entities->coinsCollected == 3) { gameScreen = GameScreen::VICTORY; }
 }

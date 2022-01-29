@@ -52,6 +52,9 @@
     <ClCompile Include="Source\Window.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Gui.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -130,6 +133,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\Window.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gui.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

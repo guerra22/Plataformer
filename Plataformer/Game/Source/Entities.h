@@ -13,8 +13,16 @@
 
 struct Heart {
 	PhysBody* heart;
-	Animation idleHeart;
 	bool isAwake;
+};
+
+struct CheckPoint {
+	PhysBody* flag;
+};
+
+struct Coin {
+	PhysBody* coin;
+	bool isCollected;
 };
 
 class Entities : public Module
@@ -43,11 +51,30 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Save function
+	void SaveEntities(pugi::xml_node& save);
+
+	int damageScreenCooldown;
+
+	int coinsCollected;
+
 	Heart* heart1;
 	Heart* heart2;
-	Animation* idleHeart;
-	Animation* currentHeartAnim = nullptr;
+	Coin* coin1;
+	Coin* coin2;
+	Coin* coin3;
+	CheckPoint* checkpoint;
 	SDL_Texture* heartTexture;
+	SDL_Texture* DoorClosed;
+	SDL_Texture* DoorOpenned;
+	SDL_Texture* CheckpointTexture;
+	SDL_Texture* coinTexture;
+	SDL_Texture* DamageScreen;
+
+	SDL_Texture* heartGui;
+	SDL_Texture* coinGui;
+	SDL_Texture* emptyHeartGui;
+	SDL_Texture* emptyCoinGui;
 
 
 

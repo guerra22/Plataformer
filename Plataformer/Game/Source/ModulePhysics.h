@@ -46,7 +46,11 @@ public:
 		ENEMY_FH,
 		ENEMY_L,
 		ENEMY_LH,
-		HEART,
+		HEART1,
+		HEART2,
+		COIN1,
+		COIN2,
+		COIN3,
 		CHECKPOINT,
 		PLATFORM,
 		WIN

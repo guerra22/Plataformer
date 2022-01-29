@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Entities.cpp" />
+    <ClCompile Include="Source\Gui.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entities.h" />
     <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\Gui.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\ModulePhysics.h" />
     <ClInclude Include="Source\p2List.h" />

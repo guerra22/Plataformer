@@ -23,6 +23,7 @@ class ModulePhysics;
 class Entities;
 class Enemy;
 class Player;
+class Gui;
 
 class App
 {
@@ -31,26 +32,14 @@ public:
 	int gameState;
 	// False-OFF True-ON
 	bool godeMode;
-	// Enemy states
-	bool isDeadFh;
-	bool isDeadLh;
+
+	// GameState
+	bool Restart;
+	bool Pause;
+
 	//hit cooldowns
 	int flyingCooldown;
 	int landCooldown;
-	//player health
-	int playerHealth;
-	// Saved player position
-	int playerX;
-	int playerY;
-	//fly enemy
-	int FlyEnemyX;
-	int FlyEnemyY;
-	//Land Enemy
-	int LandEnemyX;
-	int LandEnemyY;
-	// heart states
-	bool heart1Awake;
-	bool heart2Awake;
 
 	// Constructor
 	App(int argc, char* args[]);
@@ -122,6 +111,7 @@ public:
 	Entities* entities;
 	Enemy* enemy;
 	Player* player;
+	Gui* gui;
 
 private:
 

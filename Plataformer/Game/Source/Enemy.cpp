@@ -68,8 +68,8 @@ bool Enemy::Start()
 	//Initializing land enemy struct data
 	landEnemy = new LandEnemy;
 	elandState = IDLE;
-	landEnemy->enemy = app->physics->CreateCircle(730, 200, 7, b2_dynamicBody);
-	landEnemy->hitbox = app->physics->CreateCircle(730, 195, 5, b2_dynamicBody);
+	landEnemy->enemy = app->physics->CreateCircle(730, 200, 7, b2_kinematicBody);
+	landEnemy->hitbox = app->physics->CreateCircle(730, 195, 5, b2_kinematicBody);
 	landEnemy->enemy->body->SetFixedRotation(true);
 	landEnemy->hitbox->body->SetFixedRotation(true);
 	landEnemy->enemy->listener = this;
@@ -195,7 +195,7 @@ bool Enemy::Update(float dt)
 		}
 	}
 	else {
-		flyingEnemy->enemy->body->SetTransform({ 0,0 }, 0.0f);
+		flyingEnemy->enemy->body->SetTransform({ 0,1000 }, 0.0f);
 	}
 
 	if (landEnemy->isDead == false) {
@@ -209,19 +209,11 @@ bool Enemy::Update(float dt)
 		}
 	}
 	else {
-		landEnemy->enemy->body->SetTransform({ 0,0 }, 0.0f);
+		landEnemy->enemy->body->SetTransform({ 0,1000 }, 0.0f);
 	}
 
 	flyingEnemy->hitbox->body->SetTransform({ flyingEnemy->enemy->body->GetPosition().x, flyingEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
 	landEnemy->hitbox->body->SetTransform({ landEnemy->enemy->body->GetPosition().x, landEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
-
-	//Load State
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
-	    flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->FlyEnemyX), PIXEL_TO_METERS(app->FlyEnemyY) }, 0.0f);
-		flyingEnemy->isDead = app->isDeadFh;
-		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(app->LandEnemyX), PIXEL_TO_METERS(app->LandEnemyY) }, 0.0f);
-		landEnemy->isDead = app->isDeadLh;
-	}
 
 	
     return true;

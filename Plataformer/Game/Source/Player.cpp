@@ -89,6 +89,10 @@ bool Player::Start()
 	app->audio->LoadFx("Assets/audio/fx/gameOverSound.wav");
 	app->audio->LoadFx("Assets/audio/fx/enemyDamage.wav");
 	app->audio->LoadFx("Assets/audio/fx/enemyKill.wav");
+	app->audio->LoadFx("Assets/audio/fx/healthRecover.wav");
+	app->audio->LoadFx("Assets/audio/fx/checkpoint.wav");
+	app->audio->LoadFx("Assets/audio/fx/point.wav");
+	app->audio->LoadFx("Assets/audio/fx/health.wav");
 
 	app->flyingCooldown = 0;
 	app->landCooldown = 0;
@@ -195,16 +199,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	//Load State
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
-		p->player->body->SetTransform( { PIXEL_TO_METERS(app->playerX), PIXEL_TO_METERS(app->playerY) }, 0.0f);
-		if (app->playerHealth == 3 || app->playerHealth == 2 || app->playerHealth == 1) { 
-			Health = app->playerHealth; 
-		}else {
-			Health = 3;
-		}
-	}
-
 	return true;
 }
 
@@ -226,6 +220,7 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_F && app->gameState == 1 &&
 		app->flyingCooldown < 1 && app->enemy->flyingEnemy->isDead == false ){
+		app->entities->damageScreenCooldown = 10;
 		if (Health == 1) {
 			app->gameState = 2;
 			app->audio->PlayFx(3, 0);
@@ -237,7 +232,7 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->flyingCooldown = 120;
 	}
 	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_L && app->gameState == 1 &&
-		app->landCooldown < 1 && app->enemy->flyingEnemy->isDead == false ) {
+		app->landCooldown < 1 && app->enemy->landEnemy->isDead == false ) {
 		if (Health == 1) {
 			app->gameState = 2;
 			app->audio->PlayFx(3, 0);
@@ -249,10 +244,11 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->landCooldown = 120;
 	}
 	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::FLOOR && app->gameState == 1) {
+		app->entities->damageScreenCooldown = 10;
 		app->gameState = 2;
-		app->audio->PlayFx(5, 0);
+		app->audio->PlayFx(3, 0);
 	}
-	if (bodyA == p->player && bodyB->type == PhysBody::Type::WIN) { 
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::WIN && app->entities->coinsCollected == 3) {
 		app->gameState = 3;
 		app->audio->PlayFx(2, 0);
 	}
@@ -264,6 +260,35 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(5, 0);
 		app->enemy->landEnemy->isDead = true; 
 	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::HEART1) {
+		app->entities->heart1->isAwake = false;
+		app->audio->PlayFx(8, 0);
+		if (Health < 3) { ++Health; }
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::HEART2) {
+		app->entities->heart2->isAwake = false;
+		app->audio->PlayFx(8, 0);
+		if (Health < 3) { ++Health; }
+	}
+	if(bodyA == p->player && bodyB->type == PhysBody::Type::CHECKPOINT) {
+		app->audio->PlayFx(7, 0);
+		app->SaveGameRequest(); 
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::COIN1) {
+		app->audio->PlayFx(8, 0);
+		app->entities->coin1->isCollected = true;
+		++app->entities->coinsCollected;
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::COIN2) {
+		app->audio->PlayFx(8, 0);
+		app->entities->coin2->isCollected = true;
+		++app->entities->coinsCollected;
+	}
+	if (bodyA == p->player && bodyB->type == PhysBody::Type::COIN3) {
+		app->audio->PlayFx(8, 0);
+		app->entities->coin3->isCollected = true;
+		++app->entities->coinsCollected;
+	}
 }
 
 void Player::SavePlayer(pugi::xml_node& save)
@@ -272,4 +297,3 @@ void Player::SavePlayer(pugi::xml_node& save)
    save.attribute("y") = METERS_TO_PIXELS(p->player->body->GetPosition().y);
    save.attribute("health") = Health;
 }
-

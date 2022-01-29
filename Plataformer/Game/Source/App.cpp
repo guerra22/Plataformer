@@ -12,6 +12,7 @@
 #include "Entities.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Gui.h"
 
 #include <iostream>
 #include <sstream>
@@ -32,6 +33,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entities = new Entities();
 	enemy = new Enemy();
 	player = new Player();
+	gui = new Gui();
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	
@@ -45,6 +47,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entities);
 	AddModule(enemy);
 	AddModule(player);
+	AddModule(gui);
 	// Render last to swap buffer
 	AddModule(render);
 
@@ -135,6 +138,9 @@ bool App::Start()
 		ret = item->data->Start();
 		item = item->next;
 	}
+
+	Restart = true;
+	Pause = false;
 
 	return ret;
 }
@@ -359,17 +365,22 @@ bool App::LoadGame()
 			pugi::xml_node level = save_node.child("level");
 
 			pugi::xml_node player = save_node.child("player");
-			playerX = player.attribute("x").as_int();
-		    playerY = player.attribute("y").as_int();
-			playerHealth = player.attribute("health").as_int();
+			app->player->p->player->body->SetTransform({ PIXEL_TO_METERS(player.attribute("x").as_int()), PIXEL_TO_METERS(player.attribute("y").as_int()) }, 0.0f);
+			app->player->Health = player.attribute("health").as_int();
 
 			pugi::xml_node entities = save_node.child("entities");
-			FlyEnemyX = entities.attribute("xf").as_int();
-			FlyEnemyY = entities.attribute("yf").as_int();
-			isDeadFh = entities.attribute("isDeadFh").as_bool();
-			LandEnemyX = entities.attribute("xl").as_int();
-			LandEnemyY = entities.attribute("yl").as_int();
-			isDeadLh = entities.attribute("isDeadLh").as_bool();
+			app->enemy->flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(entities.attribute("xf").as_int()), PIXEL_TO_METERS(entities.attribute("yf").as_int()) }, 0.0f);
+			app->enemy->flyingEnemy->isDead = entities.attribute("isDeadFh").as_bool();
+			app->enemy->landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(entities.attribute("xl").as_int()), PIXEL_TO_METERS(entities.attribute("yl").as_int()) }, 0.0f);
+			app->enemy->landEnemy->isDead = entities.attribute("isDeadLh").as_bool();
+			app->entities->heart1->isAwake = entities.attribute("heart1awake").as_bool();
+			app->entities->heart2->isAwake = entities.attribute("heart2awake").as_bool();
+			app->entities->heart1->heart->body->SetTransform({ PIXEL_TO_METERS(497), PIXEL_TO_METERS(270) }, 0.0f);
+			app->entities->heart2->heart->body->SetTransform({ PIXEL_TO_METERS(1010), PIXEL_TO_METERS(240) }, 0.0f);
+			app->entities->coin1->isCollected = entities.attribute("coin1collected").as_bool();
+			app->entities->coin2->isCollected = entities.attribute("coin2collected").as_bool();
+			app->entities->coin3->isCollected = entities.attribute("coin3collected").as_bool();
+			app->entities->coinsCollected = entities.attribute("coinsCollected").as_int();
 
 			app->enemy->LoadState(save_node.child("entities"));
 
@@ -420,6 +431,12 @@ bool App::SaveGame() const
 			entities.append_attribute("xl");
 			entities.append_attribute("yl");
 			entities.append_attribute("isDeadLh");
+			entities.append_attribute("heart1awake");
+			entities.append_attribute("heart2awake");
+			entities.append_attribute("coin1collected");
+			entities.append_attribute("coin2collected");
+			entities.append_attribute("coin3collected");
+			entities.append_attribute("coinsCollected");
 		}
 		else {
 			save_node = saveFile.child("game_state");
@@ -430,6 +447,7 @@ bool App::SaveGame() const
 
 		level.attribute("value") = scene;
 
+		app->entities->SaveEntities(entities);
 		app->enemy->SaveEnemy(entities);
 		app->player->SavePlayer(player);
 

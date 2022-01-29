@@ -51,7 +51,6 @@ public:
 	
 	GameScreen gameScreen;
 
-
 	p2List<PhysBody*> walls;
 
 	PhysBody* deathFloor;
@@ -60,6 +59,8 @@ public:
 	SDL_Texture* StartScreen;
 	SDL_Texture* GameOverScreen;
 	SDL_Texture* WinScreen;
+
+	bool music;
 
 	p2List<PhysBody*> box;
 

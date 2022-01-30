@@ -64,6 +64,10 @@ public:
 
 	p2List<PhysBody*> box;
 
+	uint secondsSinceInit;
+	uint timer = INITIAL_TIME;
+	uint frames = 0;
+
 private:
 	SDL_Texture* img;
 

@@ -68,6 +68,9 @@ public:
 	uint timer = INITIAL_TIME;
 	uint frames = 0;
 
+	int timeFont = -1;
+	char timeText[10] = { "\0" };
+
 private:
 	SDL_Texture* img;
 

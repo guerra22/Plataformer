@@ -8,11 +8,12 @@
 #include "Map.h"
 #include "Player.h"
 #include "Gui.h"
-
 #include "Defs.h"
 #include "Log.h"
 #include "ModulePhysics.h"
 #include "External/Box2D/Box2D/Box2D.h"
+#include "ModuleFonts.h"
+#include "stdio.h"
 
 Scene::Scene() : Module()
 {
@@ -43,8 +44,10 @@ bool Scene::Start()
 	StartScreen = app->tex->Load("Assets/textures/startScreen.png");
 	GameOverScreen = app->tex->Load("Assets/textures/GameOverScreen.png");
 	WinScreen = app->tex->Load("Assets/textures/WinScreen.png");
-	
 
+	char lookupTable[] = { "0123456789 0123456789" };
+	timeFont = app->fonts->Load("Assets/Fonts/Score2.png", lookupTable, 2);
+	
 	LOG("Creating Physics 2D environment");
 	int points[8] = {
 			0,0,
@@ -195,8 +198,13 @@ bool Scene::Update(float dt)
 		if (frames % 60 == 0)timer++;
 		frames++;
 		secondsSinceInit = INITIAL_TIME + timer;
+
+		sprintf_s(timeText, 10, "%5d", secondsSinceInit);
+		app->fonts->BlitText(50, 80, timeFont, timeText);
 	}
-	
+
+
+
 	return true;
 }
 

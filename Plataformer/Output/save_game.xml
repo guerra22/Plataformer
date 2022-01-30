@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<game_state>
+	<level value="true" />
+	<player x="853" y="185" health="3" state="" />
+	<entities xf="617" yf="185" isDeadFh="false" xl="0" yl="50000" isDeadLh="true" heart1awake="false" heart2awake="true" coin1collected="true" coin2collected="true" coin3collected="false" coinsCollected="2" />
+</game_state>

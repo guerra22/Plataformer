@@ -191,13 +191,12 @@ bool Scene::Update(float dt)
 		break;
 	}  
 
-	if (app->gameState = 1)
-	{
+	if (app->gameState == 1) {
 		if (frames % 60 == 0)timer++;
 		frames++;
 		secondsSinceInit = INITIAL_TIME + timer;
 	}
-
+	
 	return true;
 }
 

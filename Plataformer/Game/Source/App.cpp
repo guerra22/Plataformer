@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Gui.h"
+#include "ModuleFonts.h"
 
 #include <iostream>
 #include <sstream>
@@ -34,6 +35,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	enemy = new Enemy();
 	player = new Player();
 	gui = new Gui();
+	fonts = new ModuleFonts();
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	
@@ -48,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(enemy);
 	AddModule(player);
 	AddModule(gui);
+	AddModule(fonts);
 	// Render last to swap buffer
 	AddModule(render);
 

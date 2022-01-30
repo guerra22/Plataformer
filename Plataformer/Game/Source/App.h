@@ -24,6 +24,7 @@ class Entities;
 class Enemy;
 class Player;
 class Gui;
+class ModuleFonts;
 
 class App
 {
@@ -112,6 +113,7 @@ public:
 	Enemy* enemy;
 	Player* player;
 	Gui* gui;
+	ModuleFonts* fonts;
 
 private:
 

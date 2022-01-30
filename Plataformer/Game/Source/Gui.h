@@ -38,7 +38,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	// GUI State  0-Title 1-Settings 2-Credits
+	// GUI State  0-Title 1-Settings 2-Credits 3-PauseGameplay 4-Pause 5-Finish
 	int GuiState;
 	// restart progress
 	int restartProgress;
@@ -66,6 +66,19 @@ public:
 	// Credits Screen
 	SDL_Texture* creditsScreen;
 	SDL_Texture* backCreditsSelected;
+	// Pause Screen
+	SDL_Texture* pauseGameplay;
+	SDL_Texture* pauseGameplaySelected;
+	SDL_Texture* backPauseSelected;
+	SDL_Texture* exitPauseSelected;
+	SDL_Texture* pauseScreen;
+	SDL_Texture* resumePauseSelected;
+	SDL_Texture* settingsPauseSelected;
+	// Finish Screen
+	SDL_Texture* exitFinishSelected;
+	SDL_Texture* finishScreen;
+	SDL_Texture* loadFinishScreen;
+	SDL_Texture* restartFinishScreen;
 
 };
 

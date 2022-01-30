@@ -110,32 +110,87 @@ bool Player::PreUpdate()
 
 bool Player::Update(float dt)
 {
-	if (Health <= 0) { 
-		app->gameState = 2;
-		if(app->gameState == 1) { app->audio->PlayFx(3, 0); }
+	if (app->Pause == false && app->gameState == 1) {
+		if (Health <= 0) {
+			app->gameState = 2;
+			if (app->gameState == 1) { app->audio->PlayFx(3, 0); }
+		}
+
+		if (app->flyingCooldown > 0) { --app->flyingCooldown; }
+		if (app->landCooldown > 0) { --app->landCooldown; }
+		//---------------------------------------
+		switch (pState)
+		{
+		case IDLE:
+			currentAnim = &p->idlePlayerAnim;
+			break;
+		case WALK:
+			currentAnim = &p->walkingPlayerAnim;
+			break;
+		case JUMP:
+			currentAnim = &p->jumpingPlayerAnim;
+			break;
+		case DEATH:
+			currentAnim = &p->deathPlayerAnim;
+			break;
+		}
+
+		//Player movement
+		maxSpeedX = 2;
+		minSpeedX = -2;
+
+		if (app->godeMode == true)
+		{
+			if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
+			{
+				p->player->body->SetLinearVelocity({ 2, p->player->body->GetLinearVelocity().y });
+				pState = WALK;
+				p->walkingPlayerAnim.Update();
+				p->idlePlayerAnim.Reset();
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
+			{
+				p->player->body->SetLinearVelocity({ -2, p->player->body->GetLinearVelocity().y });
+				pState = WALK;
+				p->walkingPlayerAnim.Update();
+				p->idlePlayerAnim.Reset();
+			}
+			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			{
+				p->player->body->ApplyLinearImpulse({ 0.0f, -0.05f }, { 0, 0 }, true);
+			}
+		}
+		else {
+			if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
+			{
+				p->player->body->SetLinearVelocity({ 1, p->player->body->GetLinearVelocity().y });
+				pState = WALK;
+				p->walkingPlayerAnim.Update();
+				p->idlePlayerAnim.Reset();
+			}
+			//Left
+			if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
+			{
+				p->player->body->SetLinearVelocity({ -1, p->player->body->GetLinearVelocity().y });
+				pState = WALK;
+				p->walkingPlayerAnim.Update();
+				p->idlePlayerAnim.Reset();
+			}
+			//Jump
+			if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
+			{
+				app->audio->PlayFx(1, 0);
+				p->player->body->ApplyLinearImpulse({ 0.0f, -0.25f }, { 0, 0 }, true);
+				pState = JUMP;
+				p->jumpingPlayerAnim.Update();
+				p->idlePlayerAnim.Reset();
+				p->walkingPlayerAnim.Reset();
+			}
+		}
 	}
 
-	if (app->flyingCooldown > 0) { --app->flyingCooldown; }
-	if (app->landCooldown > 0) { --app->landCooldown; }
-	//---------------------------------------
-    switch (pState)
-    {
-    case IDLE:
-        currentAnim = &p->idlePlayerAnim;
-        break;
-    case WALK:
-        currentAnim = &p->walkingPlayerAnim;
-        break;
-    case JUMP:
-        currentAnim = &p->jumpingPlayerAnim;
-        break;
-    case DEATH:
-        currentAnim = &p->deathPlayerAnim;
-        break;
-    }
-
 	//Player Render
-    if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
 		Health = 3;
 		p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f);
 	}
@@ -144,66 +199,13 @@ bool Player::Update(float dt)
 		p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f);
 		--app->gui->restartProgress;
 	}
-
-    if (app->gameState == 1)
-    {
-        app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
-            &(currentAnim->GetCurrentFrame()), 1);
-    }
-    bool ret = true;
-
-    //Player movement
-    maxSpeedX = 2;
-    minSpeedX = -2;
-  
-	if (app->godeMode == true)
+	if (app->gameState == 1)
 	{
-		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
-		{
-			p->player->body->SetLinearVelocity({ 2, p->player->body->GetLinearVelocity().y });
-			pState = WALK;
-			p->walkingPlayerAnim.Update();
-			p->idlePlayerAnim.Reset();
-		}
-		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
-		{
-			p->player->body->SetLinearVelocity({ -2, p->player->body->GetLinearVelocity().y });
-			pState = WALK;
-			p->walkingPlayerAnim.Update();
-			p->idlePlayerAnim.Reset();
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		{
-			p->player->body->ApplyLinearImpulse({ 0.0f, -0.05f }, { 0, 0 }, true);
-		}
+		app->render->DrawTexture(playerTexture, METERS_TO_PIXELS(p->player->body->GetPosition().x - 23), METERS_TO_PIXELS(p->player->body->GetPosition().y) - 20,
+			&(currentAnim->GetCurrentFrame()), 1);
 	}
-	else {
-		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x <= maxSpeedX))
-		{
-			p->player->body->SetLinearVelocity({ 1, p->player->body->GetLinearVelocity().y });
-			pState = WALK;
-			p->walkingPlayerAnim.Update();
-			p->idlePlayerAnim.Reset();
-		}
-		//Left
-		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) && (p->player->body->GetLinearVelocity().x >= minSpeedX))
-		{
-			p->player->body->SetLinearVelocity({ -1, p->player->body->GetLinearVelocity().y });
-			pState = WALK;
-			p->walkingPlayerAnim.Update();
-			p->idlePlayerAnim.Reset();
-		}
-		//Jump
-		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) && (p->player->body->GetLinearVelocity().y == 0))
-		{
-			app->audio->PlayFx(1, 0);
-			p->player->body->ApplyLinearImpulse({ 0.0f, -0.25f }, { 0, 0 }, true);
-			pState = JUMP;
-			p->jumpingPlayerAnim.Update();
-			p->idlePlayerAnim.Reset();
-			p->walkingPlayerAnim.Reset();
-		}
-	}
+	bool ret = true;
+
 
 	return true;
 }
@@ -239,6 +241,7 @@ void Player::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	if (bodyA == p->player && app->godeMode == false && bodyB->type == PhysBody::Type::ENEMY_L && app->gameState == 1 &&
 		app->landCooldown < 1 && app->enemy->landEnemy->isDead == false ) {
+		app->entities->damageScreenCooldown = 10;
 		if (Health == 1) {
 			app->gameState = 2;
 			app->audio->PlayFx(3, 0);

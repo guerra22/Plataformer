@@ -157,6 +157,7 @@ bool Scene::Update(float dt)
 		}
 
 		//game state change
+		if (app->gameState == 0) { gameScreen = GameScreen::INTRO; }
 		if (app->gameState == 2) { gameScreen = GameScreen::DEFEAT; }
 		if (app->gameState == 3) { gameScreen = GameScreen::VICTORY; }
 
@@ -176,6 +177,7 @@ bool Scene::Update(float dt)
 			app->gameState = 1;
 			gameScreen = GameScreen::GAME; 
 		}
+		if (app->gameState == 1) { gameScreen = GameScreen::GAME; }
 		break;
 	case Scene::VICTORY:
 		app->render->DrawTexture(WinScreen, 0, 0, NULL, 0.0f, 0);
@@ -183,6 +185,7 @@ bool Scene::Update(float dt)
 			app->gameState = 1;
 			gameScreen = GameScreen::GAME; 
 		}
+		if (app->gameState == 1) { gameScreen = GameScreen::GAME; }
 		break;
 	default:
 		break;

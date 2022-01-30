@@ -69,7 +69,7 @@ bool Enemy::Start()
 	//Initializing land enemy struct data
 	landEnemy = new LandEnemy;
 	elandState = IDLE;
-	landEnemy->enemy = app->physics->CreateCircle(730, 200, 7, b2_kinematicBody);
+	landEnemy->enemy = app->physics->CreateCircle(730, 207, 7, b2_dynamicBody);
 	landEnemy->hitbox = app->physics->CreateCircle(730, 195, 5, b2_kinematicBody);
 	landEnemy->enemy->body->SetFixedRotation(true);
 	landEnemy->hitbox->body->SetFixedRotation(true);
@@ -125,49 +125,85 @@ bool Enemy::PreUpdate()
 
 bool Enemy::Update(float dt)
 {
-    //Enemy Animation states
-    switch (eflyingState)
-    {
-    case IDLE:
-        currentFlyingAnim = &flyingEnemy->idleAnim;
-		flyingEnemy->idleAnim.Update();
-        break;
-	case WALKING:
-		break;
-    case DEATH:
-		currentFlyingAnim = &flyingEnemy->deathAnim;
-        break;
-    }
+	if (app->Pause == false && app->gameState == 1) {
+		//Enemy Animation states
+		switch (eflyingState)
+		{
+		case IDLE:
+			currentFlyingAnim = &flyingEnemy->idleAnim;
+			flyingEnemy->idleAnim.Update();
+			break;
+		case WALKING:
+			break;
+		case DEATH:
+			currentFlyingAnim = &flyingEnemy->deathAnim;
+			break;
+		}
 
-	switch (elandState)
-	{
-	case IDLE:
-		currentLandAnim = &landEnemy->idleAnim;
-		landEnemy->idleAnim.Update();
-		break;
-	case WALKING:
-		currentLandAnim = &landEnemy->walkingAnim;
-		landEnemy->walkingAnim.Update();
-		break;
-	case DEATH:
-		currentLandAnim = &landEnemy->deathAnim;
-		break;
+		switch (elandState)
+		{
+		case IDLE:
+			currentLandAnim = &landEnemy->idleAnim;
+			landEnemy->idleAnim.Update();
+			break;
+		case WALKING:
+			currentLandAnim = &landEnemy->walkingAnim;
+			landEnemy->walkingAnim.Update();
+			break;
+		case DEATH:
+			currentLandAnim = &landEnemy->deathAnim;
+			break;
+		}
+
+		bool ret = true;
+
+		//Enemy movement
+		if (flyingEnemy->isDead == false) {
+			if (flyingEnemy->enemy->body->GetPosition().y != app->player->p->player->body->GetPosition().y) {
+				if (flyingEnemy->enemy->body->GetPosition().y > app->player->p->player->body->GetPosition().y) {
+					flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , -0.5f });
+				}
+				if (flyingEnemy->enemy->body->GetPosition().y < app->player->p->player->body->GetPosition().y) {
+					flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , 0.5f });
+				}
+			}
+			if (flyingEnemy->enemy->body->GetPosition().x != app->player->p->player->body->GetPosition().x) {
+				if (flyingEnemy->enemy->body->GetPosition().x > app->player->p->player->body->GetPosition().x) {
+					flyingEnemy->enemy->body->SetLinearVelocity({ -0.6f , flyingEnemy->enemy->body->GetLinearVelocity().y });
+				}
+				if (flyingEnemy->enemy->body->GetPosition().x < app->player->p->player->body->GetPosition().x) {
+					flyingEnemy->enemy->body->SetLinearVelocity({ 0.6 , flyingEnemy->enemy->body->GetLinearVelocity().y });
+				}
+			}
+		}
+		else {
+			flyingEnemy->enemy->body->SetTransform({ 0,1000 }, 0.0f);
+		}
+
+		if (landEnemy->isDead == false) {
+			if (landEnemy->direction == 0) {
+				landEnemy->enemy->body->SetLinearVelocity({ -0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
+				if (landEnemy->enemy->body->GetPosition().x < PIXEL_TO_METERS(690)) { landEnemy->direction = 1; }
+			}
+			else {
+				landEnemy->enemy->body->SetLinearVelocity({ 0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
+				if (landEnemy->enemy->body->GetPosition().x > PIXEL_TO_METERS(760)) { landEnemy->direction = 0; }
+			}
+		}
+		else {
+			landEnemy->enemy->body->SetTransform({ 0,1000 }, 0.0f);
+		}
+
+		flyingEnemy->hitbox->body->SetTransform({ flyingEnemy->enemy->body->GetPosition().x, flyingEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
+		landEnemy->hitbox->body->SetTransform({ landEnemy->enemy->body->GetPosition().x, landEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
 	}
-
-	//Enemy Render
-    if (app->gameState == 1 && flyingEnemy->isDead == false)
-    {
-        app->render->DrawTexture(flyingEnemyTexture, METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().x - 20), 
-            METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentFlyingAnim->GetCurrentFrame()), 1);
-    }
-	if (app->gameState == 1 && landEnemy->isDead == false)
-	{
-		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 11),
-			METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
+	else {
+		flyingEnemy->enemy->body->SetLinearVelocity({ 0.0f , 0.0f });
+		landEnemy->enemy->body->SetLinearVelocity({ 0.0f, 0.0f });
 	}
 
 	// Restart enemies position
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
 		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(230) }, 0.0f);
 		flyingEnemy->isDead = false;
 		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(730), PIXEL_TO_METERS(217) }, 0.0f);
@@ -181,48 +217,17 @@ bool Enemy::Update(float dt)
 		--app->gui->restartProgress;
 	}
 
-    bool ret = true;
-
-    //Enemy movement
-	if (flyingEnemy->isDead == false) {
-		if (flyingEnemy->enemy->body->GetPosition().y != app->player->p->player->body->GetPosition().y) {
-			if (flyingEnemy->enemy->body->GetPosition().y > app->player->p->player->body->GetPosition().y) {
-				flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , -0.5f });
-			}
-			if (flyingEnemy->enemy->body->GetPosition().y < app->player->p->player->body->GetPosition().y) {
-				flyingEnemy->enemy->body->SetLinearVelocity({ flyingEnemy->enemy->body->GetLinearVelocity().x , 0.5f });
-			}
-		}
-		if (flyingEnemy->enemy->body->GetPosition().x != app->player->p->player->body->GetPosition().x) {
-			if (flyingEnemy->enemy->body->GetPosition().x > app->player->p->player->body->GetPosition().x) {
-				flyingEnemy->enemy->body->SetLinearVelocity({ -0.6f , flyingEnemy->enemy->body->GetLinearVelocity().y });
-			}
-			if (flyingEnemy->enemy->body->GetPosition().x < app->player->p->player->body->GetPosition().x) {
-				flyingEnemy->enemy->body->SetLinearVelocity({ 0.6 , flyingEnemy->enemy->body->GetLinearVelocity().y });
-			}
-		}
+	//Enemy Render
+	if (app->gameState == 1 && flyingEnemy->isDead == false)
+	{
+		app->render->DrawTexture(flyingEnemyTexture, METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().x - 20),
+			METERS_TO_PIXELS(flyingEnemy->enemy->body->GetPosition().y - 20), &(currentFlyingAnim->GetCurrentFrame()), 1);
 	}
-	else {
-		flyingEnemy->enemy->body->SetTransform({ 0,1000 }, 0.0f);
+	if (app->gameState == 1 && landEnemy->isDead == false)
+	{
+		app->render->DrawTexture(landEnemyTexture, METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().x - 11),
+			METERS_TO_PIXELS(landEnemy->enemy->body->GetPosition().y - 11), &(currentLandAnim->GetCurrentFrame()), 1);
 	}
-
-	if (landEnemy->isDead == false) {
-		if (landEnemy->direction == 0) {
-			landEnemy->enemy->body->SetLinearVelocity({ -0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
-			if (landEnemy->enemy->body->GetPosition().x < PIXEL_TO_METERS(690)) { landEnemy->direction = 1; }
-		}
-		else {
-			landEnemy->enemy->body->SetLinearVelocity({ 0.2f, landEnemy->enemy->body->GetLinearVelocity().y });
-			if (landEnemy->enemy->body->GetPosition().x > PIXEL_TO_METERS(760)) { landEnemy->direction = 0; }
-		}
-	}
-	else {
-		landEnemy->enemy->body->SetTransform({ 0,1000 }, 0.0f);
-	}
-
-	flyingEnemy->hitbox->body->SetTransform({ flyingEnemy->enemy->body->GetPosition().x, flyingEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
-	landEnemy->hitbox->body->SetTransform({ landEnemy->enemy->body->GetPosition().x, landEnemy->enemy->body->GetPosition().y - 0.25f }, 0.0f);
-
 	
     return true;
 }

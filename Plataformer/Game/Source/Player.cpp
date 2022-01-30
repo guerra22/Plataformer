@@ -12,6 +12,7 @@
 #include "Log.h"
 #include "ModulePhysics.h"
 #include "External/Box2D/Box2D/Box2D.h"
+#include "Gui.h"
 
 
 Player::Player() : Entities()
@@ -137,6 +138,11 @@ bool Player::Update(float dt)
     if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) { 
 		Health = 3;
 		p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f);
+	}
+	if (app->gui->restartProgress > 0) {
+		Health = 3;
+		p->player->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(330) }, 0.0f);
+		--app->gui->restartProgress;
 	}
 
     if (app->gameState == 1)

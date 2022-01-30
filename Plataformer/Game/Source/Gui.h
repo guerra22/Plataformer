@@ -40,10 +40,15 @@ public:
 
 	// GUI State  0-Title 1-Settings 2-Credits
 	int GuiState;
+	// restart progress
+	int restartProgress;
 
 	//mosue position
 	int mouseX;
 	int mouseY;
+
+	// game closer
+	bool ret;
 
 	// title Screen
 	SDL_Texture* titleScreen;
@@ -61,8 +66,6 @@ public:
 	// Credits Screen
 	SDL_Texture* creditsScreen;
 	SDL_Texture* backCreditsSelected;
-
-
 
 };
 

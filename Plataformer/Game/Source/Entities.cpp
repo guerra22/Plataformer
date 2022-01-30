@@ -14,6 +14,7 @@
 #include "External/Box2D/Box2D/Box2D.h"
 #include "Entities.h"
 #include "Animation.h"
+#include "Gui.h"
 
 Entities::Entities() : Module()
 {
@@ -193,6 +194,17 @@ bool Entities::Update(float dt)
 		coin1->isCollected = false;
 		coin2->isCollected = false;
 		coin3->isCollected = false;
+	}
+	if (app->gui->restartProgress > 0) {
+		heart1->heart->body->SetTransform({ PIXEL_TO_METERS(497), PIXEL_TO_METERS(270) }, 0.0f);
+		heart2->heart->body->SetTransform({ PIXEL_TO_METERS(1010), PIXEL_TO_METERS(240) }, 0.0f);
+		heart1->isAwake = true;
+		heart2->isAwake = true;
+		coinsCollected = 0;
+		coin1->isCollected = false;
+		coin2->isCollected = false;
+		coin3->isCollected = false;
+		--app->gui->restartProgress;
 	}
 
 	return true;

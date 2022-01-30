@@ -52,6 +52,15 @@ bool Gui::Start()
 	creditsScreen = app->tex->Load("Assets/textures/guiEntities/credits/creditsScreen.png");
 	backCreditsSelected = app->tex->Load("Assets/textures/guiEntities/credits/backCreditsSelected.png");
 
+	//button sound effect
+	app->audio->LoadFx("Assets/audio/fx/button.wav");
+
+	app->scene->music = true;
+
+	restartProgress = -1;
+
+	ret = true;
+
 	return true;
 }
 
@@ -68,30 +77,91 @@ bool Gui::Update(float dt)
 		if (GuiState == 0) {
 			if ( mouseX > 555 && mouseX < 726 && mouseY > 130 && mouseY < 200) {
 				app->render->DrawTexture(startSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN && restartProgress == -1) {
+					restartProgress = 3;
+					app->audio->PlayFx(9, 0);
+				}
 			}
 			else if (mouseX > 555 && mouseX < 726 && mouseY > 222 && mouseY < 289) {
 				app->render->DrawTexture(continueSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN && restartProgress == -1) {
+					app->LoadGameRequest();
+					app->gameState = 1;
+					app->audio->PlayFx(9, 0);
+				}
 			}
 			else if (mouseX > 555 && mouseX < 726 && mouseY > 300 && mouseY < 370) {
 				app->render->DrawTexture(settingsSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN) {
+					GuiState = 1;
+					app->audio->PlayFx(9, 0);
+				}
 			}
 			else if (mouseX > 580 && mouseX < 700 && mouseY > 380 && mouseY < 430) {
 				app->render->DrawTexture(exitSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN) {
+					ret = false;
+				}
+
 			}
 			else if (mouseX > 40 && mouseX < 215 && mouseY > 370 && mouseY < 440) {
 				app->render->DrawTexture(creditsSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN) {
+					GuiState = 2;
+					app->audio->PlayFx(9, 0);
+				}
 			}
 			else {
 				app->render->DrawTexture(titleScreen, 0, 0, NULL, 0.0f, 0);
 			}
 		}
+		else if (GuiState == 1) {
+		    if (mouseX > 555 && mouseX < 726 && mouseY > 222 && mouseY < 289) {
+				app->render->DrawTexture(musicSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN) {
+					app->scene->music = !app->scene->music;
+					app->audio->PlayFx(9, 0);
+				}
+			}
+			else if (mouseX > 40 && mouseX < 215 && mouseY > 370 && mouseY < 440) {
+				app->render->DrawTexture(backSettingsSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN) {
+					GuiState = 0;
+					app->audio->PlayFx(9, 0);
+				}
+			}
+			else {
+				app->render->DrawTexture(settingsScreen, 0, 0, NULL, 0.0f, 0);
+			}
+			if(app->scene->music == true) { app->render->DrawTexture(settingsOn, 0, 0, NULL, 0.0f, 0); }
+			else { app->render->DrawTexture(settingsOff, 0, 0, NULL, 0.0f, 0); }
+		}
+		else if (GuiState == 2) {
+		
+			if (mouseX > 40 && mouseX < 215 && mouseY > 370 && mouseY < 440) {
+				app->render->DrawTexture(backCreditsSelected, 0, 0, NULL, 0.0f, 0);
+				if (app->input->GetMouseButtonDown(1) == KEY_DOWN) {
+					GuiState = 0;
+					app->audio->PlayFx(9, 0);
+				}
+			}
+			else {
+				app->render->DrawTexture(creditsScreen, 0, 0, NULL, 0.0f, 0);
+			}
+		}
 	}
+
+	if (restartProgress == 0) {
+		app->gameState = 1;
+		restartProgress = -1;
+	}
+
 	return true;
 }
 
 bool Gui::PostUpdate()
 {
-	return true;
+	return ret;
 }
 
 // Called before quitting

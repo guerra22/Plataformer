@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Player.h"
+#include "Gui.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,8 +44,6 @@ bool Scene::Start()
 	GameOverScreen = app->tex->Load("Assets/textures/GameOverScreen.png");
 	WinScreen = app->tex->Load("Assets/textures/WinScreen.png");
 	
-	// Load music
-	if (music == true) { app->audio->PlayMusic("Assets/audio/music/music_spy.ogg"); }
 
 	LOG("Creating Physics 2D environment");
 	int points[8] = {
@@ -140,7 +139,7 @@ bool Scene::Update(float dt)
 	{
 	case Scene::INTRO:
 
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || app->gameState == 1) {
 			gameScreen = GameScreen::GAME;
 			app->gameState = 1;
 		}
@@ -150,6 +149,12 @@ bool Scene::Update(float dt)
 	case Scene::GAME:
 		//Toggle godmode
 		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) { app->godeMode = !app->godeMode; }
+
+		// Music
+		if (music == true) {
+			app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
+			music = false;
+		}
 
 		//game state change
 		if (app->gameState == 2) { gameScreen = GameScreen::DEFEAT; }

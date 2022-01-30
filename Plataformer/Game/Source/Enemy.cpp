@@ -12,6 +12,7 @@
 #include "Enemy.h"
 #include "ModulePhysics.h"
 #include "External/Box2D/Box2D/Box2D.h"
+#include "Gui.h"
 
 
 Enemy::Enemy() : Entities()
@@ -171,6 +172,13 @@ bool Enemy::Update(float dt)
 		flyingEnemy->isDead = false;
 		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(730), PIXEL_TO_METERS(217) }, 0.0f);
 		landEnemy->isDead = false;
+	}
+	if (app->gui->restartProgress > 0) {
+		flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(230) }, 0.0f);
+		flyingEnemy->isDead = false;
+		landEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(730), PIXEL_TO_METERS(217) }, 0.0f);
+		landEnemy->isDead = false;
+		--app->gui->restartProgress;
 	}
 
     bool ret = true;

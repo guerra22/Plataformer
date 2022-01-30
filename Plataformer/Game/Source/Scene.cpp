@@ -196,13 +196,15 @@ bool Scene::Update(float dt)
 
 	if (app->gameState == 1) {
 		if (frames % 60 == 0)timer++;
-		frames++;
+		if (app->Pause == false)frames++;
 		secondsSinceInit = INITIAL_TIME + timer;
 
 		sprintf_s(timeText, 10, "%5d", secondsSinceInit);
 		app->fonts->BlitText(50, 80, timeFont, timeText);
 	}
-
+	else {
+		timer = 0;
+	}
 
 
 	return true;

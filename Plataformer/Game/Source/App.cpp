@@ -370,6 +370,7 @@ bool App::LoadGame()
 			pugi::xml_node player = save_node.child("player");
 			app->player->p->player->body->SetTransform({ PIXEL_TO_METERS(player.attribute("x").as_int()), PIXEL_TO_METERS(player.attribute("y").as_int()) }, 0.0f);
 			app->player->Health = player.attribute("health").as_int();
+			app->scene->timer = player.attribute("timer").as_int();
 
 			pugi::xml_node entities = save_node.child("entities");
 			app->enemy->flyingEnemy->enemy->body->SetTransform({ PIXEL_TO_METERS(entities.attribute("xf").as_int()), PIXEL_TO_METERS(entities.attribute("yf").as_int()) }, 0.0f);
@@ -426,6 +427,7 @@ bool App::SaveGame() const
 			player.append_attribute("y");
 			player.append_attribute("health");
 			player.append_attribute("state");
+			player.append_attribute("timer");
 
 			entities = save_node.append_child("entities");
 			entities.append_attribute("xf");

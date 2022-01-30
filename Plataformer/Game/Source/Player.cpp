@@ -13,6 +13,7 @@
 #include "ModulePhysics.h"
 #include "External/Box2D/Box2D/Box2D.h"
 #include "Gui.h"
+#include "ModuleFonts.h"
 
 
 Player::Player() : Entities()
@@ -305,4 +306,5 @@ void Player::SavePlayer(pugi::xml_node& save)
    save.attribute("x") = METERS_TO_PIXELS(p->player->body->GetPosition().x);
    save.attribute("y") = METERS_TO_PIXELS(p->player->body->GetPosition().y);
    save.attribute("health") = Health;
+   save.attribute("timer") = app->scene->timer;
 }
